@@ -21,7 +21,7 @@ const navLinks = [
 
 export function TheHeader() {
   return (
-    <header className="bg-background supports-backdrop-filter:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
+    <header className="bg-background supports-backdrop-filter:bg-background/90 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold">
           <Image
