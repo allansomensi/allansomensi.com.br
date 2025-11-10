@@ -43,7 +43,7 @@ export function Lessons() {
             </CardContent>
             <CardFooter>
               <Button className="w-full" variant="default">
-                Saiba Mais
+                Saiba mais
               </Button>
             </CardFooter>
           </Card>
@@ -73,7 +73,7 @@ export function Lessons() {
             </CardContent>
             <CardFooter>
               <Button className="w-full" variant="default">
-                Saiba Mais
+                Saiba mais
               </Button>
             </CardFooter>
           </Card>
