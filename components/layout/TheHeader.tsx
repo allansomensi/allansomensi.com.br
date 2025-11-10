@@ -16,7 +16,7 @@ const navLinks = [
   { href: "/sobre", label: "Sobre" },
   { href: "/loja", label: "Loja" },
   { href: "/agenda", label: "Agenda" },
-  { href: "/contato", label: "Contato" },
+  { href: "#contato", label: "Contato" },
 ];
 
 export function TheHeader() {

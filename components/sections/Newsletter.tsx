@@ -8,7 +8,10 @@ import {
 
 export function Newsletter() {
   return (
-    <div className="bg-secondary/80 dark:bg-secondary/40 relative mx-auto flex w-full flex-col justify-between gap-y-6 border-x px-2 py-8 md:px-4">
+    <div
+      id="newsletter"
+      className="bg-secondary/80 dark:bg-secondary/40 relative mx-auto flex w-full flex-col justify-between gap-y-6 border-x px-2 py-8 sm:py-10 md:px-4"
+    >
       <div className="pointer-events-none absolute -top-px left-1/2 w-screen -translate-x-1/2 border-t" />
 
       <div className="space-y-1">

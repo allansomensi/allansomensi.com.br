@@ -1,3 +1,4 @@
+import { Contact } from "@/components/sections/Contact";
 import { Faq } from "@/components/sections/Faq";
 import { Lessons } from "@/components/sections/Lessons";
 import { Newsletter } from "@/components/sections/Newsletter";
@@ -11,6 +12,7 @@ export default function Home() {
       <Lessons />
       <ShopCategories />
       <Faq />
+      <Contact />
       <Newsletter />
     </main>
   );

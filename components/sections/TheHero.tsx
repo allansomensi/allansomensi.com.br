@@ -35,7 +35,7 @@ export function TheHero() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full"
+      className="w-full pb-8 sm:pb-10"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >

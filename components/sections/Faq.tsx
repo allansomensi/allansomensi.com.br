@@ -7,7 +7,7 @@ import {
 
 export function Faq() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-7 px-4 pt-16">
+    <div className="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:py-10">
       <div className="space-y-2">
         <h2 className="text-3xl font-semibold md:text-4xl">
           Perguntas Frequentes
@@ -39,13 +39,6 @@ export function Faq() {
           </AccordionItem>
         ))}
       </Accordion>
-      <p className="text-muted-foreground mb-6">
-        Não encontrou o que procurava?{" "}
-        <a className="text-primary hover:underline" href="/contato">
-          Entre em contato comigo
-        </a>
-        .
-      </p>
     </div>
   );
 }

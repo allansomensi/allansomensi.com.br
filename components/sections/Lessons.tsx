@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 
 export function Lessons() {
   return (
-    <div id="aulas" className="py-12 lg:py-24">
+    <div id="aulas" className="py-8 lg:py-10">
       <div className="container mx-auto px-4">
         <h2 className="mb-8 text-center text-3xl font-bold tracking-tighter">
           Faça Aulas Comigo
