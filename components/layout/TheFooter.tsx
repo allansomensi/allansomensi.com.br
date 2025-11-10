@@ -109,7 +109,7 @@ export function TheFooter() {
           <h4 className="mb-2 font-semibold">Navegação</h4>
           <FooterLink href="#newsletter">Newsletter</FooterLink>
           <FooterLink href="#contato">Contato</FooterLink>
-          <FooterLink href="/sobre">Sobre</FooterLink>
+          <FooterLink href="#sobre">Sobre</FooterLink>
         </div>
 
         <div className="flex flex-col items-center gap-2 sm:items-start">
