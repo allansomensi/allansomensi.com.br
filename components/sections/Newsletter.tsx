@@ -13,7 +13,6 @@ export function Newsletter() {
       className="bg-secondary/80 dark:bg-secondary/40 relative mx-auto flex w-full flex-col justify-between gap-y-6 border-x px-2 py-8 sm:py-10 md:px-4"
     >
       <div className="pointer-events-none absolute -top-px left-1/2 w-screen -translate-x-1/2 border-t" />
-
       <div className="space-y-1">
         <h2 className="text-center text-2xl font-semibold tracking-tight md:text-4xl">
           Inscreva-se na Newsletter!
@@ -30,12 +29,10 @@ export function Newsletter() {
             <AtSignIcon />
           </InputGroupAddon>
         </InputGroup>
-
         <Button>
           Inscrever-se <ArrowRightIcon />
         </Button>
       </div>
-
       <div className="pointer-events-none absolute -bottom-px left-1/2 w-screen -translate-x-1/2 border-b" />
     </div>
   );

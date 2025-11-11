@@ -11,9 +11,9 @@ import Image from "next/image";
 
 export function ShopCategories() {
   return (
-    <section id="loja" className="py-8 lg:py-10">
+    <div className="py-8 lg:py-10">
       <div className="container mx-auto px-4">
-        <h2 className="mb-4 text-center text-3xl font-bold tracking-tighter">
+        <h2 className="mb-4 text-center text-4xl font-bold tracking-tighter">
           Produtos Digitais
         </h2>
         <p className="text-muted-foreground mx-auto mb-8 max-w-xl text-center text-lg">
@@ -103,6 +103,6 @@ export function ShopCategories() {
           </Card>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

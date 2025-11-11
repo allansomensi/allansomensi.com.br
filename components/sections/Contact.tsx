@@ -11,7 +11,7 @@ export function Contact() {
     <div id="contato" className="w-full py-8 sm:py-10">
       <div className="container mx-auto flex max-w-lg flex-col items-center gap-y-6 px-4">
         <div className="text-center">
-          <h2 className="text-primary text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="text-primary text-center text-4xl font-bold tracking-tighter">
             Contato
           </h2>
         </div>

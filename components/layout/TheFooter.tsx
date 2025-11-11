@@ -52,7 +52,6 @@ export function TheFooter() {
             />
             <span className="text-lg font-semibold">Allan Somensi</span>
           </div>
-
           <FooterLink href="/aulas">Agende sua aula de guitarra</FooterLink>
           <div className="mt-2 flex items-center gap-4">
             <SocialIcon href="https://instagram.com/allanrsomensi">
@@ -97,31 +96,27 @@ export function TheFooter() {
             </SocialIcon>
           </div>
         </div>
-
         <div className="flex flex-col items-center gap-2 sm:items-start">
           <h4 className="mb-2 font-semibold">Loja</h4>
-          <FooterLink href="/loja">Backing Tracks</FooterLink>
-          <FooterLink href="/partituras">Tablaturas</FooterLink>
-          <FooterLink href="/backing-tracks">Presets</FooterLink>
+          <FooterLink href="/loja/backing-tracks">Backing Tracks</FooterLink>
+          <FooterLink href="/loja/tablaturas">Tablaturas</FooterLink>
+          <FooterLink href="/loja/presets">Presets</FooterLink>
         </div>
-
         <div className="flex flex-col items-center gap-2 sm:items-start">
           <h4 className="mb-2 font-semibold">Navegação</h4>
-          <FooterLink href="#newsletter">Newsletter</FooterLink>
-          <FooterLink href="#contato">Contato</FooterLink>
-          <FooterLink href="#sobre">Sobre</FooterLink>
+          <FooterLink href="/#newsletter">Newsletter</FooterLink>
+          <FooterLink href="/#contato">Contato</FooterLink>
+          <FooterLink href="/#sobre">Sobre</FooterLink>
         </div>
-
         <div className="flex flex-col items-center gap-2 sm:items-start">
           <h4 className="mb-2 font-semibold">Suporte</h4>
           <FooterLink href="/politica-de-privacidade">
             Política de Privacidade
           </FooterLink>
           <FooterLink href="/termos-de-uso">Termos de Uso</FooterLink>
-          <FooterLink href="/faq">FAQ</FooterLink>
+          <FooterLink href="/#faq">FAQ</FooterLink>
         </div>
       </div>
-
       <div className="container mx-auto mt-12 border-t px-4 pt-8 md:px-6">
         <p className="text-muted-foreground text-center text-sm">
           © {new Date().getFullYear()} Allan Somensi. Todos os direitos

@@ -7,12 +7,15 @@ import {
 
 export function Faq() {
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:py-10">
+    <div
+      id="faq"
+      className="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:py-10"
+    >
       <div className="space-y-2">
-        <h2 className="text-3xl font-semibold md:text-4xl">
+        <h2 className="text-center text-4xl font-bold tracking-tighter">
           Perguntas Frequentes
         </h2>
-        <p className="text-muted-foreground max-w-2xl">
+        <p className="text-muted-foreground max-w-2xl text-center">
           Aqui estão as dúvidas mais comuns sobre aulas, produtos digitais e
           agendamentos. Se não encontrar o que procura, sinta-se à vontade para
           entrar em contato comigo.
