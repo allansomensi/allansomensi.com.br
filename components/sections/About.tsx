@@ -12,20 +12,25 @@ export function About() {
             <h2 className="text-center text-4xl font-bold tracking-tighter">
               Sobre Mim
             </h2>
-            <div className="text-muted-foreground space-y-4 text-lg leading-relaxed">
+            <div className="text-muted-foreground space-y-4 leading-relaxed md:text-lg">
               <p>
-                Magni minus vero exercitationem et dolor sed voluptatem.
-                Quibusdam aut esse iusto ullam provident. Est enim corporis
-                nihil molestias repudiandae repudiandae vel. Mollitia eos in
-                omnis illum repellat sit nihil libero. Sequi earum similique
-                cupiditate.
+                Há mais de sete anos estudo música, focado no estudo de
+                <b> guitarra e violão</b>. Na guitarra, fui muito influenciado
+                por mestres como
+                <i> Edu Ardanuy</i>, <i> Kiko Loureiro</i>, <i> Andy Timmons</i>{" "}
+                e <i> Greg Howe</i>. No violão, minha paixão é a música
+                brasileira, especialmente a obra de gigantes como{" "}
+                <i> Raphael Rabello</i>, <i> Tom Jobim</i>, <i> João Bosco </i>{" "}
+                e <i>Yamandu Costa</i>.
               </p>
               <p>
-                Magni minus vero exercitationem et dolor sed voluptatem.
-                Quibusdam aut esse iusto ullam provident. Est enim corporis
-                nihil molestias repudiandae repudiandae vel. Mollitia eos in
-                omnis illum repellat sit nihil libero. Sequi earum similique
-                cupiditate.
+                Minha formação reflete essa dualidade. Aprendi com músicos
+                renomados como <i> Mozart Mello</i> e <i> Kiko Loureiro</i>,
+                além de estudar <b>violão de 7 cordas</b> com
+                <i> Giovani Pinceta</i>, referência no Rio Grande do Sul. O som
+                que busco no instrumento é a mistura do Rock com música
+                brasileira. É um aprendizado infinito e que sigo com estudo e
+                dedicação na música.
               </p>
             </div>
           </div>

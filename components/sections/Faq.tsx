@@ -51,7 +51,7 @@ const questions = [
     id: "item-1",
     title: "Como funciona o agendamento das aulas?",
     content:
-      "Basta acessar a página 'Aulas', escolher o melhor horário disponível no calendário, preencher seus dados e realizar o pagamento. Você receberá um e-mail de confirmação com todos os detalhes.",
+      "Basta clicar no botão 'Agendar Aula' e o agendamento será realizado pelo site Calendly.com. Você receberá um e-mail de confirmação com todos os detalhes após o agendamento.",
   },
   {
     id: "item-2",
@@ -63,7 +63,7 @@ const questions = [
     id: "item-3",
     title: "Onde as aulas presenciais acontecem?",
     content:
-      "As aulas presenciais podem ser realizadas à domicílio do aluno ou na minha casa, localizada em Bento Gonçalves. O endereço completo é enviado após a confirmação do agendamento.",
+      "As aulas presenciais são realizadas a domicílio na casa do aluno ou na minha casa, aulas remotas são realizadas via Google Meet.",
   },
   {
     id: "item-4",
@@ -82,12 +82,12 @@ const questions = [
     id: "item-6",
     title: "Em quais formatos os arquivos da loja são entregues?",
     content:
-      "As Backing Tracks são entregues em formato MP3 de alta qualidade. As Tablaturas estão disponíveis em formato PDF e, na maioria dos casos, também em formato Guitar Pro (.gpx ou .gp5). Verifique a descrição de cada produto para mais detalhes.",
+      "As Backing Tracks são entregues em formato MP3 ou WAV de alta qualidade. As Tablaturas estão disponíveis em formato PDF e, na maioria dos casos, também em formato Guitar Pro (.gpx ou .gp5). Verifique a descrição de cada produto para mais detalhes.",
   },
   {
     id: "item-7",
     title: "Não encontrei minha dúvida aqui. Como posso entrar em contato?",
     content:
-      "Para qualquer outra dúvida, por favor, entre em contato comigo por email ou pelas redes sociais. Responderei o mais breve possível!",
+      "Para qualquer outra dúvida, por favor, entre em contato comigo por email, WhatsApp ou pelas redes sociais. Responderei o mais breve possível!",
   },
 ];

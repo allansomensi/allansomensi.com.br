@@ -21,9 +21,9 @@ import Image from "next/image";
 
 const navLinks = [
   { href: "/", label: "Início", icon: Home },
-  { href: "/#sobre", label: "Sobre", icon: User },
-  { href: "/loja", label: "Loja", icon: Store },
   { href: "/#aulas", label: "Aulas", icon: BookTextIcon },
+  { href: "/loja", label: "Loja", icon: Store },
+  { href: "/#sobre", label: "Sobre", icon: User },
   { href: "/#contato", label: "Contato", icon: Mail },
 ];
 
@@ -77,7 +77,7 @@ export function TheHeader() {
                   <span className="sr-only">Abrir menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80">
+              <SheetContent side="right" className="w-1/2">
                 <SheetHeader>
                   <SheetTitle className="flex items-center gap-2">
                     <Image

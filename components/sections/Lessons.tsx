@@ -22,7 +22,8 @@ export function Lessons() {
             <CardHeader>
               <CardTitle>Aulas Presenciais</CardTitle>
               <CardDescription>
-                Atendimento individual personalizado em Bento Gonçalves (RS).
+                Atendimento presencial na minha casa ou a domicílio em Bento
+                Gonçalves (RS) e região.
               </CardDescription>
             </CardHeader>
             <CardContent className="grow">
@@ -58,7 +59,7 @@ export function Lessons() {
             <CardHeader>
               <CardTitle>Aulas Online</CardTitle>
               <CardDescription>
-                Estude com conforto da sua casa ou de qualquer lugar do mundo.
+                Estude do conforto da sua casa ou de qualquer lugar do mundo.
               </CardDescription>
             </CardHeader>
             <CardContent className="grow">
