@@ -59,10 +59,14 @@ export function TheHeader() {
             asChild
             className="hidden xl:flex xl:justify-start"
           >
-            <Link href="/aulas">
+            <a
+              href="https://calendly.com/allansomensi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <CalendarPlus className="h-5 w-5" />
               <span>Agende uma aula</span>
-            </Link>
+            </a>
           </Button>
           <ThemeToggle />
           <div className="md:hidden">
@@ -101,10 +105,10 @@ export function TheHeader() {
                     </Link>
                   ))}
                   <Button asChild className="mt-4 justify-start gap-3">
-                    <Link href="/aulas">
+                    <a href="https://calendly.com/allansomensi">
                       <CalendarPlus className="h-5 w-5" />
                       <span>Agende uma aula</span>
-                    </Link>
+                    </a>
                   </Button>
                 </nav>
               </SheetContent>

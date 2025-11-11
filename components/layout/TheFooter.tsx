@@ -52,7 +52,14 @@ export function TheFooter() {
             />
             <span className="text-lg font-semibold">Allan Somensi</span>
           </div>
-          <FooterLink href="/aulas">Agende sua aula de guitarra</FooterLink>
+          <a
+            href="https://calendly.com/allansomensi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Agende sua aula de guitarra
+          </a>
           <div className="mt-2 flex items-center gap-4">
             <SocialIcon href="https://instagram.com/allanrsomensi">
               <Image

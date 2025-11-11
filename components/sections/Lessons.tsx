@@ -42,8 +42,14 @@ export function Lessons() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full" variant="default">
-                Saiba mais
+              <Button className="w-full" variant="default" asChild>
+                <a
+                  href="https://calendly.com/allansomensi/presencial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Agendar aula
+                </a>
               </Button>
             </CardFooter>
           </Card>
@@ -72,8 +78,14 @@ export function Lessons() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full" variant="default">
-                Saiba mais
+              <Button className="w-full" variant="default" asChild>
+                <a
+                  href="https://calendly.com/allansomensi/online"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Agendar aula
+                </a>
               </Button>
             </CardFooter>
           </Card>
