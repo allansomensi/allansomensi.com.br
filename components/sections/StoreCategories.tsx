@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
-export function ShopCategories() {
+export function StoreCategories() {
   return (
     <div className="py-8 lg:py-10">
       <div className="container mx-auto px-4">
@@ -44,7 +45,15 @@ export function ShopCategories() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Ver mais</Button>
+              <Button asChild className="w-full">
+                <Link
+                  href="/loja/backing-tracks"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver mais
+                </Link>
+              </Button>
             </CardFooter>
           </Card>
           {/* Card 2: Presets */}
@@ -70,7 +79,15 @@ export function ShopCategories() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Ver mais</Button>
+              <Button asChild className="w-full">
+                <Link
+                  href="/loja/presets"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver mais
+                </Link>
+              </Button>
             </CardFooter>
           </Card>
           {/* Card 3: Tablaturas */}
@@ -98,7 +115,15 @@ export function ShopCategories() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Ver mais</Button>
+              <Button asChild className="w-full">
+                <Link
+                  href="/loja/tablaturas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver mais
+                </Link>
+              </Button>
             </CardFooter>
           </Card>
         </div>
