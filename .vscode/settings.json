@@ -2,6 +2,12 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "material-icon-theme.folders.associations": {
     "loja": "store",
-    "sections": "content"
+    "sections": "content",
+    "sanity": "api",
+    "schemaTypes": "context",
+    "(main)": "core",
+    "backing-tracks": "audio",
+    "tablaturas": "docs",
+    "presets": "controller"
   }
 }

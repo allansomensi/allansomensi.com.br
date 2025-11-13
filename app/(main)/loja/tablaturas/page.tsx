@@ -2,8 +2,13 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Suspense } from "react";
-import { TablaturasList } from "@/components/store/tablaturas-list";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TablaturasList } from "@/components/store/tablaturas-list";
+import { SanityProduct } from "@/types";
+import { tablaturasQuery } from "@/sanity/lib/queries";
+import { client } from "@/sanity/lib/client";
+
+const ITEMS_PER_PAGE = 9;
 
 function ProductGridSkeleton() {
   return (
@@ -15,13 +20,28 @@ function ProductGridSkeleton() {
   );
 }
 
-export default function TablaturasPage() {
+export default async function TablaturasPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const currentPage = Number(searchParams.page) || 1;
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const end = currentPage * ITEMS_PER_PAGE;
+
+  const { products, totalCount } = await client.fetch<{
+    products: SanityProduct[];
+    totalCount: number;
+  }>(tablaturasQuery, { start, end });
+
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
       <Button asChild variant="outline" className="mb-6">
         <Link href="/loja">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Voltar para a Loja
+          Voltar para a loja
         </Link>
       </Button>
 
@@ -35,7 +55,11 @@ export default function TablaturasPage() {
       </div>
 
       <Suspense fallback={<ProductGridSkeleton />}>
-        <TablaturasList />
+        <TablaturasList
+          products={products}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
       </Suspense>
     </div>
   );

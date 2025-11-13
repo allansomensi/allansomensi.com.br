@@ -1,8 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/components/store/product-card";
-import { PRODUCTS } from "@/lib/data";
 import {
   Pagination,
   PaginationContent,
@@ -10,32 +8,29 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { SanityProduct } from "@/types";
 
-const ITEMS_PER_PAGE = 9;
+interface PresetsListProps {
+  products: SanityProduct[];
+  currentPage: number;
+  totalPages: number;
+}
 
-export function PresetsList() {
-  const searchParams = useSearchParams();
-  const page = searchParams.get("page");
-
-  const allPresets = PRODUCTS.filter((p) => p.category === "preset");
-  const currentPage = Number(page) || 1;
-  const totalPages = Math.ceil(allPresets.length / ITEMS_PER_PAGE);
-
-  const paginatedProducts = allPresets.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE,
-  );
-
+export function PresetsList({
+  products,
+  currentPage,
+  totalPages,
+}: PresetsListProps) {
   const hasPrevPage = currentPage > 1;
   const hasNextPage = currentPage < totalPages;
 
   return (
     <>
-      {paginatedProducts.length > 0 ? (
+      {products.length > 0 ? (
         <>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {paginatedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {products.map((product) => (
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
 

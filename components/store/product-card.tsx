@@ -12,7 +12,6 @@ import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -20,16 +19,16 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/lib/data";
+import { SanityProduct } from "@/types";
+import { PortableText } from "next-sanity";
 
 interface ProductCardProps {
-  product: Product;
+  product: SanityProduct;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
   const startingPrice = product.purchaseOptions.reduce((min, p) => {
-    const price = parseFloat(p.price.replace("R$ ", "").replace(",", "."));
-    return price < min ? price : min;
+    return p.price < min ? p.price : min;
   }, Infinity);
 
   const getCategoryIcon = (category: string) => {
@@ -115,9 +114,9 @@ export function ProductCard({ product }: ProductCardProps) {
                 ))}
               </div>
 
-              <DialogDescription className="text-base">
-                {product.longDescription}
-              </DialogDescription>
+              <div className="text-muted-foreground text-base">
+                <PortableText value={product.longDescription} />
+              </div>
             </div>
 
             <div className="flex flex-col space-y-4 lg:col-span-3">
@@ -125,7 +124,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 <h4 className="text-lg font-semibold">Escolha sua opção:</h4>
                 {product.purchaseOptions.map((option) => (
                   <div
-                    key={option.id}
+                    key={option._key}
                     className="flex flex-col rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between"
                   >
                     <div className="mb-3 grow sm:mb-0 sm:pr-4">
@@ -134,13 +133,13 @@ export function ProductCard({ product }: ProductCardProps) {
                         {option.description}
                       </p>
                       <span className="text-primary mt-1 block text-xl font-bold">
-                        {option.price}
+                        R$ {option.price}
                       </span>
                     </div>
 
                     <Button asChild className="w-full shrink-0 sm:w-auto">
                       <Link
-                        href={option.kiwifyLink}
+                        href={option.checkoutLink}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
