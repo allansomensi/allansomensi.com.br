@@ -79,7 +79,7 @@ export function StoreCategories() {
                 />
               </div>
               <ul className="list-inside list-disc text-sm">
-                <li>Timbres de Artistas famosos</li>
+                <li>Timbres de artistas famosos</li>
                 <li>Pedidos personalizados</li>
               </ul>
             </CardContent>
