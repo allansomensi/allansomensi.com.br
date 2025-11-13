@@ -20,6 +20,11 @@ export function StoreCategories() {
         <p className="text-muted-foreground mx-auto mb-8 max-w-xl text-center text-lg">
           Encontre os melhores recursos para transformar o seu som.
         </p>
+        <div className="mb-8 text-center lg:mb-10">
+          <Button asChild size="lg">
+            <Link href="/loja">Acesse a loja</Link>
+          </Button>
+        </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
           <Card className="flex flex-col">
             <CardHeader>
