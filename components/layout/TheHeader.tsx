@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import {
   Menu,
   Home,
@@ -28,6 +31,8 @@ const navLinks = [
 ];
 
 export function TheHeader() {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
   return (
     <header className="bg-background supports-backdrop-filter:bg-background/90 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6">
@@ -69,8 +74,9 @@ export function TheHeader() {
             </a>
           </Button>
           <ThemeToggle />
+
           <div className="md:hidden">
-            <Sheet>
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
                   <Menu className="h-5 w-5" />
@@ -95,6 +101,7 @@ export function TheHeader() {
                     <Link
                       key={link.href}
                       href={link.href}
+                      onClick={() => setIsSheetOpen(false)}
                       className={buttonVariants({
                         variant: "ghost",
                         className: "justify-start gap-3",
@@ -104,8 +111,16 @@ export function TheHeader() {
                       <span>{link.label}</span>
                     </Link>
                   ))}
-                  <Button asChild className="mt-4 justify-start gap-3">
-                    <a href="https://calendly.com/allansomensi">
+                  <Button
+                    asChild
+                    className="mt-4 justify-start gap-3"
+                    onClick={() => setIsSheetOpen(false)}
+                  >
+                    <a
+                      href="https://calendly.com/allansomensi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <CalendarPlus className="h-5 w-5" />
                       <span>Agende uma aula</span>
                     </a>

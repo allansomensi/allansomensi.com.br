@@ -13,7 +13,7 @@ export function Lessons() {
   return (
     <div id="aulas" className="py-8 lg:py-10">
       <div className="container mx-auto px-4">
-        <h2 className="mb-8 text-center text-4xl font-bold tracking-tighter">
+        <h2 className="mb-14 text-center text-4xl font-bold tracking-tighter">
           Faça Aulas Comigo
         </h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
