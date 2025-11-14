@@ -47,10 +47,10 @@ export default async function TablaturasPage({
 
       <div className="mb-12 text-center">
         <h1 className="mb-4 text-5xl font-extrabold tracking-tight">
-          Tablaturas
+          Backing Tracks
         </h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-xl">
-          Todas as minhas tablaturas, arranjos e materiais de estudo.
+          Pacotes de faixas em alta qualidade para tocar junto.
         </p>
       </div>
 

@@ -12,7 +12,7 @@ export default async function Loja() {
 
   return (
     <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
-      <Button asChild variant="outline">
+      <Button asChild variant="outline" className="mb-6">
         <Link href="/">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Voltar para o início
