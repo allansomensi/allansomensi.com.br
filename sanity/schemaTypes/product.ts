@@ -53,7 +53,7 @@ export default defineType({
     }),
     defineField({
       name: "badges",
-      title: "Badges (Formatos incluídos)",
+      title: "Badges",
       type: "array",
       of: [{ type: "string" }],
       options: {

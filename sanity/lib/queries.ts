@@ -6,33 +6,33 @@ export const lojaQuery = groq`{
     title,
     slug,
     description,
-    longDescription, // <-- CAMPO ADICIONADO
+    longDescription,
     "imageUrl": mainImage.asset->url,
     "category": category->title,
     badges,
-    purchaseOptions // <-- CAMPO ADICIONADO
+    purchaseOptions
   },
   "backingTracks": *[_type == "product" && category->slug.current == "backing-track"] | order(_createdAt desc) [0...3] {
     _id,
     title,
     slug,
     description,
-    longDescription, // <-- CAMPO ADICIONADO
+    longDescription,
     "imageUrl": mainImage.asset->url,
     "category": category->title,
     badges,
-    purchaseOptions // <-- CAMPO ADICIONADO
+    purchaseOptions
   },
   "presets": *[_type == "product" && category->slug.current == "preset"] | order(_createdAt desc) [0...3] {
     _id,
     title,
     slug,
     description,
-    longDescription, // <-- CAMPO ADICIONADO
+    longDescription,
     "imageUrl": mainImage.asset->url,
     "category": category->title,
     badges,
-    purchaseOptions // <-- CAMPO ADICIONADO
+    purchaseOptions
   }
 }`;
 

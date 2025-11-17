@@ -46,9 +46,7 @@ export default async function PresetsPage({
       </Button>
 
       <div className="mb-12 text-center">
-        <h1 className="mb-4 text-5xl font-extrabold tracking-tight">
-          Presets de Timbre
-        </h1>
+        <h1 className="mb-4 text-5xl font-extrabold tracking-tight">Presets</h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-xl">
           Timbres prontos para sua pedaleira digital.
         </p>
