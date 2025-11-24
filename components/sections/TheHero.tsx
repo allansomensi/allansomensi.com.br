@@ -32,13 +32,13 @@ const banners = [
   },
   {
     id: 3,
-    src: "/banners/evento.jpg",
+    src: "/banners/evento.png",
     alt: "Banner Evento",
-    title: "Show ao vivo no Barracão!",
+    title: "Show ao vivo em Farroupilha!",
     description:
-      "Dia 22 de Novembro estarei no Ginásio Barracão com a banda Rosa dos Ventos. Não perca!",
-    buttonText: "Conheça a Banda",
-    href: "https://bandarosadosventos.com.br",
+      "Dia 6 de Dezembro estarei tocando em Farroupilha com a banda do Kelvin Alves. Não perca!",
+    buttonText: "Saiba mais",
+    href: "https://instagram.com/kelvin.alves_oficial",
   },
 ];
 
