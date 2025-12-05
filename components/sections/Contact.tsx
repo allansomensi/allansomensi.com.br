@@ -4,7 +4,7 @@ import Image from "next/image";
 const WHATSAPP_NUMBER = "5554981187806";
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 const WHATSAPP_NUMBER_DISPLAY = "(54) 98118-7806";
-const EMAIL_ADDRESS = "allansomensimusico@proton.me";
+const EMAIL_ADDRESS = "contato@allansomensi.com.br";
 
 export function Contact() {
   return (

@@ -81,7 +81,7 @@ export function Lessons() {
             <CardFooter>
               <Button className="w-full" variant="default" asChild>
                 <a
-                  href="https://calendly.com/allansomensi/online"
+                  href="https://wa.me/5554981187806"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
