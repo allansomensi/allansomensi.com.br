@@ -1,3 +1,4 @@
+import { SanityAsset } from "@sanity/image-url";
 import { PortableTextBlock } from "sanity";
 
 export interface SanityPurchaseOption {
@@ -24,4 +25,15 @@ export interface LojaPageData {
   tablaturas: SanityProduct[];
   backingTracks: SanityProduct[];
   presets: SanityProduct[];
+}
+
+export interface HeroBannerProps {
+  banners: {
+    _id: string;
+    title: string;
+    description: string;
+    image: SanityAsset;
+    buttonText: string;
+    link: string;
+  }[];
 }

@@ -10,42 +10,15 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
+import { HeroBannerProps } from "@/types";
 
-const banners = [
-  {
-    id: 1,
-    src: "/banners/aula.png",
-    alt: "Banner aulas",
-    title: "Aulas de Guitarra e Violão",
-    description: "Evolua sua técnica, teoria e criatividade musical.",
-    buttonText: "Saiba mais",
-    href: "/#aulas",
-  },
-  {
-    id: 2,
-    src: "/banners/loja.png",
-    alt: "Banner Loja",
-    title: "Loja Virtual",
-    description: "Backing Tracks, presets e tabs.",
-    buttonText: "Acessar loja",
-    href: "/loja",
-  },
-  {
-    id: 3,
-    src: "/banners/evento.png",
-    alt: "Banner Evento",
-    title: "Show ao vivo em Farroupilha!",
-    description:
-      "Dia 6 de Dezembro estarei tocando em Farroupilha com a banda do Kelvin Alves. Não perca!",
-    buttonText: "Saiba mais",
-    href: "https://instagram.com/kelvin.alves_oficial",
-  },
-];
-
-export function TheHero() {
+export function TheHero({ banners }: HeroBannerProps) {
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true }),
   );
+
+  if (!banners || banners.length === 0) return null;
 
   return (
     <Carousel
@@ -55,27 +28,44 @@ export function TheHero() {
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent className="h-[60vh] md:h-[80vh]">
-        {banners.map((banner) => (
-          <CarouselItem key={banner.id}>
+        {banners.map((banner, index) => (
+          <CarouselItem key={banner._id}>
             <div className="relative h-full w-full">
-              <Image
-                src={banner.src}
-                alt={banner.alt}
-                fill
-                className="object-cover"
-                priority={banner.id === 1}
-              />
+              {banner.image && (
+                <Image
+                  src={urlFor(banner.image).url()}
+                  alt={banner.title || "Banner Image"}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+              )}
 
               <div className="relative z-10 flex h-full w-full flex-col items-center justify-center bg-black/40 p-4 text-center text-white">
-                <h1 className="text-3xl font-bold select-none md:text-5xl lg:text-6xl">
+                <h1 className="text-3xl font-bold drop-shadow-md select-none md:text-5xl lg:text-6xl">
                   {banner.title}
                 </h1>
-                <p className="mt-4 max-w-lg text-base select-none md:text-xl">
+                <p className="mt-4 max-w-lg text-base drop-shadow-sm select-none md:text-xl">
                   {banner.description}
                 </p>
-                <Button className="mt-6 select-none" size="lg" asChild>
-                  <Link href={banner.href}>{banner.buttonText}</Link>
-                </Button>
+
+                {banner.link && (
+                  <Button className="mt-6 select-none" size="lg" asChild>
+                    <Link
+                      href={banner.link}
+                      target={
+                        banner.link.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel={
+                        banner.link.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                    >
+                      {banner.buttonText || "Saiba mais"}
+                    </Link>
+                  </Button>
+                )}
               </div>
             </div>
           </CarouselItem>

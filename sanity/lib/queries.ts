@@ -80,3 +80,15 @@ export const presetsQuery = groq`{
   },
   "totalCount": count(*[_type == "product" && category->slug.current == "preset"])
 }`;
+
+export const heroBannersQuery = groq`
+  *[_type == "heroBanner" && active == true] | order(order asc) {
+    _id,
+    title,
+    description,
+    image,
+    buttonText,
+    link,
+    order
+  }
+`;
