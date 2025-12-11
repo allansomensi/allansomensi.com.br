@@ -1,13 +1,33 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import { AboutProps } from "@/types";
 
-export function About() {
+export function About({ image }: AboutProps) {
+  const imageUrl = image?.image
+    ? urlFor(image.image).width(800).height(800).url()
+    : null;
+
   return (
     <div id="sobre" className="w-full py-10 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-8 md:flex-row md:gap-12">
           <div className="w-full md:w-1/3">
-            <Skeleton className="h-96 w-full rounded-lg shadow-lg md:min-h-[400px]" />
+            {imageUrl ? (
+              <div className="relative h-96 w-full overflow-hidden rounded-lg shadow-xl md:min-h-[400px]">
+                <Image
+                  src={imageUrl}
+                  alt={image?.title || "Sobre Mim"}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+            ) : (
+              <Skeleton className="h-96 w-full rounded-lg shadow-lg md:min-h-[400px]" />
+            )}
           </div>
+
           <div className="w-full space-y-6 text-center md:w-2/3 md:text-left">
             <h2 className="text-center text-4xl font-bold tracking-tighter">
               Sobre Mim

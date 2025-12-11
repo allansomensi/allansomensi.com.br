@@ -92,3 +92,9 @@ export const heroBannersQuery = groq`
     order
   }
 `;
+
+export const aboutImageQuery = groq`
+  *[_type == "aboutImage"][0]{
+    title,
+    image
+  }`;

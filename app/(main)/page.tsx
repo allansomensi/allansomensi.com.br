@@ -6,17 +6,20 @@ import { Newsletter } from "@/components/sections/Newsletter";
 import { StoreCategories } from "@/components/sections/StoreCategories";
 import { TheHero } from "@/components/sections/TheHero";
 import { client } from "@/sanity/lib/client";
-import { heroBannersQuery } from "@/sanity/lib/queries";
+import { aboutImageQuery, heroBannersQuery } from "@/sanity/lib/queries";
 
 export default async function Home() {
-  const banners = await client.fetch(heroBannersQuery);
+  const [banners, aboutImage] = await Promise.all([
+    client.fetch(heroBannersQuery),
+    client.fetch(aboutImageQuery),
+  ]);
 
   return (
     <main className="flex flex-col items-center">
       <TheHero banners={banners} />
       <Lessons />
       <StoreCategories />
-      <About />
+      <About image={aboutImage} />
       <Faq />
       <Contact />
       <Newsletter />

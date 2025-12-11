@@ -37,3 +37,10 @@ export interface HeroBannerProps {
     link: string;
   }[];
 }
+
+export interface AboutProps {
+  image: {
+    title: string;
+    image: SanityAsset;
+  } | null;
+}

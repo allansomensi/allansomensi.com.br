@@ -3,7 +3,8 @@ import product from "./product";
 import category from "./category";
 import purchaseOption from "./purchaseOption";
 import heroBanner from "./heroBanner";
+import { aboutImage } from "./aboutImage";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [product, category, purchaseOption, heroBanner],
+  types: [product, category, purchaseOption, heroBanner, aboutImage],
 };
