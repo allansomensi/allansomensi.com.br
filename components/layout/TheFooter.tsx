@@ -61,7 +61,7 @@ export function TheFooter() {
             Agende sua aula de guitarra
           </a>
           <div className="mt-2 flex items-center gap-4">
-            <SocialIcon href="https://instagram.com/allanrsomensi">
+            <SocialIcon href="https://instagram.com/allansomensi">
               <Image
                 src={"/icons/instagram.svg"}
                 width={20}
@@ -71,7 +71,7 @@ export function TheFooter() {
               />
               <span className="sr-only">Instagram</span>
             </SocialIcon>
-            <SocialIcon href="https://facebook.com/allanrsomensi">
+            <SocialIcon href="https://facebook.com/allansomensi">
               <Image
                 src={"/icons/facebook.svg"}
                 width={20}

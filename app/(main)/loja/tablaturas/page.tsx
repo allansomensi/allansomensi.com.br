@@ -13,9 +13,9 @@ const ITEMS_PER_PAGE = 9;
 function ProductGridSkeleton() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <Skeleton className="h-[300px] w-full" />
-      <Skeleton className="h-[300px] w-full" />
-      <Skeleton className="h-[300px] w-full" />
+      <Skeleton className="h-75 w-full" />
+      <Skeleton className="h-75 w-full" />
+      <Skeleton className="h-75 w-full" />
     </div>
   );
 }

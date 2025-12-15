@@ -74,7 +74,7 @@ export function Newsletter() {
           onSubmit={handleSubmit}
           className="flex flex-col items-center gap-2 sm:flex-row sm:items-center"
         >
-          <InputGroup className="bg-card max-w-[280px]">
+          <InputGroup className="bg-card max-w-70">
             <InputGroupInput
               placeholder="Digite seu email"
               type="email"
