@@ -14,7 +14,7 @@ export function About({ image }: AboutProps) {
         <div className="flex flex-col items-center gap-8 md:flex-row md:gap-12">
           <div className="w-full md:w-1/3">
             {imageUrl ? (
-              <div className="relative h-96 w-full overflow-hidden rounded-lg shadow-xl md:min-h-[400px]">
+              <div className="relative h-96 w-full overflow-hidden rounded-lg shadow-xl md:min-h-100">
                 <Image
                   src={imageUrl}
                   alt={image?.title || "Sobre Mim"}
@@ -24,7 +24,7 @@ export function About({ image }: AboutProps) {
                 />
               </div>
             ) : (
-              <Skeleton className="h-96 w-full rounded-lg shadow-lg md:min-h-[400px]" />
+              <Skeleton className="h-96 w-full rounded-lg shadow-lg md:min-h-100" />
             )}
           </div>
 
