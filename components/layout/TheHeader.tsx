@@ -47,7 +47,7 @@ export function TheHeader() {
               height={38}
               width={38}
               alt="Logo"
-              className="invert transition-opacity group-hover:opacity-80"
+              className="h-auto invert transition-opacity group-hover:opacity-80"
             />
             <span className="hidden text-sm font-bold tracking-widest text-white/70 uppercase sm:block">
               Allan Somensi

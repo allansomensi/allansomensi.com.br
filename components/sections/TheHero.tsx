@@ -34,8 +34,8 @@ export function TheHero({ banners }: HeroBannerProps) {
               {/* Background image */}
               {banner.image && (
                 <Image
-                  src={urlFor(banner.image).url()}
-                  alt={banner.title || "Banner"}
+                  src={urlFor(banner.image).width(1920).height(1080).url()}
+                  alt={banner.imageAlt || banner.title || "Banner"}
                   fill
                   className="object-cover"
                   priority={index === 0}

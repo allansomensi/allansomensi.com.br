@@ -27,7 +27,8 @@ export default function RootLayout({
   return (
     <html
       lang="pt-br"
-      className="scroll-pt-20 scroll-smooth"
+      className="scroll-smooth"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body

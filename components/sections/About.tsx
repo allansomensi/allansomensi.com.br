@@ -5,7 +5,7 @@ import { AboutProps } from "@/types";
 
 export function About({ image }: AboutProps) {
   const imageUrl = image?.image
-    ? urlFor(image.image).width(800).height(800).url()
+    ? urlFor(image.image).width(600).height(800).url()
     : null;
 
   return (
@@ -17,10 +17,10 @@ export function About({ image }: AboutProps) {
             <div className="w-full shrink-0 lg:w-80">
               {imageUrl ? (
                 <div className="relative overflow-hidden rounded-2xl border border-white/8">
-                  <div className="aspect-3/4 w-full">
+                  <div className="relative aspect-3/4 w-full">
                     <Image
                       src={imageUrl}
-                      alt={image?.title || "Allan Somensi"}
+                      alt={image?.imageAlt || image?.title || "Allan Somensi"}
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 320px"

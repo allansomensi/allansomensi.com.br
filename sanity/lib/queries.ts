@@ -7,7 +7,9 @@ export const lojaQuery = groq`{
     slug,
     description,
     longDescription,
+    mainImage,
     "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "category": category->title,
     badges,
     purchaseOptions
@@ -18,7 +20,9 @@ export const lojaQuery = groq`{
     slug,
     description,
     longDescription,
+    mainImage,
     "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "category": category->title,
     badges,
     purchaseOptions
@@ -29,7 +33,9 @@ export const lojaQuery = groq`{
     slug,
     description,
     longDescription,
+    mainImage,
     "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "category": category->title,
     badges,
     purchaseOptions
@@ -43,7 +49,9 @@ export const backingTracksQuery = groq`{
     slug,
     description,
     longDescription,
+    mainImage,
     "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "category": category->title,
     badges,
     purchaseOptions
@@ -58,7 +66,9 @@ export const tablaturasQuery = groq`{
     slug,
     description,
     longDescription,
+    mainImage,
     "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "category": category->title,
     badges,
     purchaseOptions
@@ -73,7 +83,9 @@ export const presetsQuery = groq`{
     slug,
     description,
     longDescription,
+    mainImage,
     "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "category": category->title,
     badges,
     purchaseOptions
@@ -87,6 +99,7 @@ export const heroBannersQuery = groq`
     title,
     description,
     image,
+    "imageAlt": image.alt,
     buttonText,
     link,
     order
@@ -96,5 +109,7 @@ export const heroBannersQuery = groq`
 export const aboutImageQuery = groq`
   *[_type == "aboutImage"] | order(_updatedAt desc)[0] {
     title,
-    image
-  }`;
+    image,
+    "imageAlt": image.alt
+  }
+`;

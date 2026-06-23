@@ -28,6 +28,7 @@ export default defineType({
       title: "Descrição Curta (para cards)",
       type: "string",
       description: "Um resumo de uma linha do produto.",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "longDescription",
@@ -43,6 +44,16 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Texto Alternativo",
+          description: "Importante para acessibilidade e SEO.",
+          validation: (Rule) => Rule.required(),
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "category",

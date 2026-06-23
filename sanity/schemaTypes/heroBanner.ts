@@ -9,6 +9,7 @@ export default defineType({
       name: "title",
       title: "Título Principal",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
@@ -21,6 +22,16 @@ export default defineType({
       title: "Imagem de Fundo",
       type: "image",
       options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Texto Alternativo",
+          description: "Importante para acessibilidade e SEO.",
+          validation: (Rule) => Rule.required(),
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "buttonText",
@@ -44,6 +55,7 @@ export default defineType({
       type: "number",
       description: "Use 1 para o primeiro slide, 2 para o segundo, etc.",
       initialValue: 0,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "active",

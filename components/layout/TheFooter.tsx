@@ -55,7 +55,7 @@ export function TheFooter() {
               width={32}
               height={32}
               alt="Allan Somensi Logo"
-              className="opacity-80 invert"
+              className="h-auto opacity-80 invert"
             />
             <span className="text-sm font-bold tracking-widest text-white/50 uppercase">
               Allan Somensi

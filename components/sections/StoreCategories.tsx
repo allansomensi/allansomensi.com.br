@@ -77,6 +77,7 @@ export function StoreCategories() {
                   src={cat.image}
                   fill
                   alt={cat.title}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-[oklch(0.12_0.016_265)] via-transparent to-transparent" />

@@ -1,14 +1,16 @@
 import { defineType, defineField } from "sanity";
 
-export const aboutImage = defineType({
+export default defineType({
   name: "aboutImage",
   title: "Sobre Mim",
   type: "document",
   fields: [
     defineField({
       name: "title",
-      title: "Título (para Alt Text)",
+      title: "Título Interno",
       type: "string",
+      description:
+        "Apenas para identificação no painel (Ex: 'Foto de Perfil Principal')",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -16,6 +18,16 @@ export const aboutImage = defineType({
       title: "Imagem",
       type: "image",
       options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Texto Alternativo",
+          description:
+            "Descreva a imagem detalhadamente para acessibilidade e SEO.",
+          validation: (Rule) => Rule.required(),
+        }),
+      ],
       validation: (Rule) => Rule.required(),
     }),
   ],

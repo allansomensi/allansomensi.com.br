@@ -18,6 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SanityProduct } from "@/types";
 import { PortableText } from "next-sanity";
+import { urlFor } from "@/sanity/lib/image";
 
 interface ProductCardProps {
   product: SanityProduct;
@@ -61,8 +62,12 @@ export function ProductCard({ product }: ProductCardProps) {
           {/* Image */}
           <div className="relative aspect-video w-full overflow-hidden">
             <Image
-              src={product.imageUrl}
-              alt={product.title}
+              src={
+                product.mainImage
+                  ? urlFor(product.mainImage).width(800).height(450).url()
+                  : product.imageUrl
+              }
+              alt={product.imageAlt || product.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -135,8 +140,12 @@ export function ProductCard({ product }: ProductCardProps) {
             <div className="flex flex-col space-y-4 lg:col-span-2">
               <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-white/8">
                 <Image
-                  src={product.imageUrl}
-                  alt={product.title}
+                  src={
+                    product.mainImage
+                      ? urlFor(product.mainImage).width(1280).height(720).url()
+                      : product.imageUrl
+                  }
+                  alt={product.imageAlt || product.title}
                   fill
                   className="object-cover"
                 />
