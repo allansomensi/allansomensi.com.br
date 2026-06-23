@@ -39,7 +39,7 @@ export function Newsletter() {
       if (res.ok) {
         setMessage("Sucesso! Você está inscrito.");
         setStatus("success");
-        setEmail(""); // Limpa o campo
+        setEmail("");
       } else {
         throw new Error(data.error || "Algo deu errado.");
       }
@@ -54,51 +54,63 @@ export function Newsletter() {
   };
 
   return (
-    <div
+    <section
       id="newsletter"
-      className="bg-secondary/80 dark:bg-secondary/40 relative mx-auto flex w-full flex-col justify-between gap-y-6 border-x px-2 py-8 sm:py-10 md:px-4"
+      className="relative w-full overflow-hidden bg-[oklch(0.13_0.02_265)] py-16 lg:py-24"
     >
-      <div className="pointer-events-none absolute -top-px left-1/2 w-screen -translate-x-1/2 border-t" />
-      <div className="space-y-1">
-        <h2 className="text-center text-2xl font-semibold tracking-tight md:text-4xl">
-          Inscreva-se na Newsletter!
-        </h2>
-        <p className="text-muted-foreground text-center text-sm text-balance md:text-base">
-          Receba novidades, dicas de guitarra e lançamentos exclusivos
-          diretamente no seu e-mail.
-        </p>
-      </div>
+      {/* Decorative glow */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-20"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 100%, oklch(0.72 0.17 72) 0%, transparent 70%)",
+        }}
+      />
 
-      <div className="flex flex-col items-center justify-center gap-2">
+      {/* Top/bottom borders */}
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72/0.3)] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72/0.3)] to-transparent" />
+
+      <div className="relative container mx-auto px-4 text-center">
+        <p className="eyebrow mb-4">Fique por dentro</p>
+        <h2 className="mb-3 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          Inscreva-se na Newsletter
+        </h2>
+        <p className="text-muted-foreground mx-auto mb-10 max-w-md text-lg">
+          Novidades, dicas de guitarra e lançamentos exclusivos direto no seu
+          e-mail.
+        </p>
+
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col items-center gap-2 sm:flex-row sm:items-center"
+          className="mx-auto flex max-w-md flex-col items-center gap-3 sm:flex-row"
         >
-          <InputGroup className="bg-card max-w-70">
+          <InputGroup className="flex-1 border-white/10 bg-[oklch(0.1_0.016_265)]">
             <InputGroupInput
-              placeholder="Digite seu email"
+              placeholder="Seu melhor e-mail"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "loading" || status === "success"}
               required
+              className="text-white placeholder:text-white/25"
             />
             <InputGroupAddon>
-              <AtSignIcon />
+              <AtSignIcon className="text-white/25" />
             </InputGroupAddon>
           </InputGroup>
 
           <Button
             type="submit"
             disabled={status === "loading" || status === "success"}
+            className="shrink-0 bg-[oklch(0.72_0.17_72)] font-semibold text-[oklch(0.08_0.02_60)] hover:bg-[oklch(0.78_0.17_72)]"
           >
             {status === "loading" && <Loader2 className="animate-spin" />}
-
-            {status === "success" && "Inscrito!"}
-
+            {status === "success" && "Inscrito! ✓"}
             {(status === "idle" || status === "error") && (
               <>
-                Inscrever-se <ArrowRightIcon className="ml-2 h-4 w-4" />
+                Inscrever-se
+                <ArrowRightIcon className="ml-1 h-4 w-4" />
               </>
             )}
           </Button>
@@ -106,16 +118,18 @@ export function Newsletter() {
 
         {message && (
           <p
-            className={`mt-2 text-sm ${
-              status === "error" ? "text-red-500" : "text-green-500"
+            className={`mt-4 text-sm font-medium ${
+              status === "error" ? "text-red-400" : "text-[oklch(0.72_0.17_72)]"
             }`}
           >
             {message}
           </p>
         )}
-      </div>
 
-      <div className="pointer-events-none absolute -bottom-px left-1/2 w-screen -translate-x-1/2 border-b" />
-    </div>
+        <p className="text-muted-foreground mt-4 text-xs">
+          Sem spam. Cancele quando quiser.
+        </p>
+      </div>
+    </section>
   );
 }

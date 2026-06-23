@@ -1,14 +1,11 @@
-import { FileText, Music, Download, ShoppingCart } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+  FileText,
+  Music,
+  Download,
+  ShoppingCart,
+  ArrowUpRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -34,70 +31,109 @@ export function ProductCard({ product }: ProductCardProps) {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case "tablatura":
-        return <FileText className="mr-2 h-5 w-5" />;
+        return <FileText className="h-4 w-4" />;
       case "backing-track":
-        return <Music className="mr-2 h-5 w-5" />;
+        return <Music className="h-4 w-4" />;
       case "preset":
-        return <Download className="mr-2 h-5 w-5" />;
+        return <Download className="h-4 w-4" />;
       default:
         return null;
+    }
+  };
+
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case "tablatura":
+        return "Tablatura";
+      case "backing-track":
+        return "Backing Track";
+      case "preset":
+        return "Preset";
+      default:
+        return category;
     }
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Card className="flex h-full cursor-pointer flex-col overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-          <CardHeader className="p-0">
-            <div className="relative aspect-video w-full">
-              <Image
-                src={product.imageUrl}
-                alt={product.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+        <div className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-white/8 bg-[oklch(0.12_0.016_265)] transition-all hover:border-[oklch(0.72_0.17_72/0.35)] hover:shadow-[0_0_0_1px_oklch(0.72_0.17_72/0.08),0_12px_40px_oklch(0_0_0/0.5)]">
+          {/* Image */}
+          <div className="relative aspect-video w-full overflow-hidden">
+            <Image
+              src={product.imageUrl}
+              alt={product.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            {/* Category pill overlay */}
+            <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/60 px-2.5 py-1 text-xs font-semibold text-white/80 backdrop-blur-sm">
+              {getCategoryIcon(product.category)}
+              <span>{getCategoryLabel(product.category)}</span>
             </div>
-          </CardHeader>
-          <CardContent className="grow p-4">
-            <CardTitle className="text-lg leading-tight font-semibold">
+          </div>
+
+          {/* Content */}
+          <div className="flex flex-1 flex-col p-5">
+            <h3 className="mb-1.5 text-base leading-snug font-bold">
               {product.title}
-            </CardTitle>
-            <CardDescription className="mt-1 text-sm">
+            </h3>
+            <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
               {product.description}
-            </CardDescription>
-          </CardContent>
-          <CardFooter className="p-4 pt-0">
-            <div className="flex w-full items-center justify-between">
-              <span className="text-muted-foreground text-sm font-medium">
-                A partir de
-              </span>
-              <span className="text-primary text-lg font-bold">
-                {product.purchaseOptions.length > 0
-                  ? `R$ ${startingPrice.toFixed(2).replace(".", ",")}`
-                  : "Grátis"}
+            </p>
+
+            {/* Badges */}
+            {product.badges?.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-1.5">
+                {product.badges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs font-medium text-white/50"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Price row */}
+            <div className="mt-auto flex items-center justify-between border-t border-white/8 pt-4">
+              <div>
+                <p className="text-xs text-white/35">A partir de</p>
+                <p className="text-lg font-bold text-[oklch(0.72_0.17_72)]">
+                  {product.purchaseOptions.length > 0
+                    ? `R$ ${startingPrice.toFixed(2).replace(".", ",")}`
+                    : "Grátis"}
+                </p>
+              </div>
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[oklch(0.72_0.17_72/0.12)] text-[oklch(0.72_0.17_72)] transition-colors group-hover:bg-[oklch(0.72_0.17_72)] group-hover:text-[oklch(0.08_0.02_60)]">
+                <ArrowUpRight className="h-4 w-4" />
               </span>
             </div>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </DialogTrigger>
 
-      {/* Modal*/}
-      <DialogContent className="flex max-h-[90vh] flex-col sm:max-w-3xl">
+      {/* Modal */}
+      <DialogContent className="flex max-h-[90vh] flex-col border-white/10 bg-[oklch(0.11_0.016_265)] sm:max-w-3xl">
         <DialogHeader>
-          <DialogTitle className="text-3xl leading-tight font-bold">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="flex items-center gap-1.5 rounded-full border border-[oklch(0.72_0.17_72/0.3)] bg-[oklch(0.72_0.17_72/0.1)] px-2.5 py-1 text-xs font-semibold text-[oklch(0.72_0.17_72)]">
+              {getCategoryIcon(product.category)}
+              {getCategoryLabel(product.category)}
+            </span>
+          </div>
+          <DialogTitle className="text-2xl leading-tight font-extrabold tracking-tight">
             {product.title}
           </DialogTitle>
-          <div className="text-muted-foreground flex items-center pt-1">
-            {getCategoryIcon(product.category)}
-            <span className="capitalize">{product.category}</span>
-          </div>
         </DialogHeader>
 
         <ScrollArea className="grow pr-6">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-5 lg:gap-8">
+            {/* Left col */}
             <div className="flex flex-col space-y-4 lg:col-span-2">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-white/8">
                 <Image
                   src={product.imageUrl}
                   alt={product.title}
@@ -106,38 +142,51 @@ export function ProductCard({ product }: ProductCardProps) {
                 />
               </div>
 
-              <div className="flex flex-wrap gap-2">
-                {product.badges.map((badge) => (
-                  <Badge key={badge} variant="secondary">
-                    {badge}
-                  </Badge>
-                ))}
-              </div>
+              {product.badges?.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {product.badges.map((badge) => (
+                    <span
+                      key={badge}
+                      className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/50"
+                    >
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              )}
 
-              <div className="text-muted-foreground text-base">
+              <div className="text-muted-foreground text-sm leading-relaxed">
                 <PortableText value={product.longDescription} />
               </div>
             </div>
 
+            {/* Right col — purchase options */}
             <div className="flex flex-col space-y-4 lg:col-span-3">
+              <h4 className="text-xs font-bold tracking-widest text-white/40 uppercase">
+                Escolha sua opção
+              </h4>
               <div className="space-y-3">
-                <h4 className="text-lg font-semibold">Escolha sua opção:</h4>
                 {product.purchaseOptions.map((option) => (
                   <div
                     key={option._key}
-                    className="flex flex-col rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between"
+                    className="plectrum-accent rounded-xl border border-white/8 bg-[oklch(0.13_0.018_265)] p-5 transition-colors hover:border-[oklch(0.72_0.17_72/0.3)]"
                   >
-                    <div className="mb-3 grow sm:mb-0 sm:pr-4">
-                      <h5 className="font-semibold">{option.name}</h5>
-                      <p className="text-muted-foreground text-sm">
-                        {option.description}
+                    <div className="mb-4">
+                      <h5 className="font-bold">{option.name}</h5>
+                      {option.description && (
+                        <p className="text-muted-foreground mt-1 text-sm">
+                          {option.description}
+                        </p>
+                      )}
+                      <p className="mt-2 text-2xl font-extrabold text-[oklch(0.72_0.17_72)]">
+                        R$ {option.price.toFixed(2).replace(".", ",")}
                       </p>
-                      <span className="text-primary mt-1 block text-xl font-bold">
-                        R$ {option.price}
-                      </span>
                     </div>
 
-                    <Button asChild className="w-full shrink-0 sm:w-auto">
+                    <Button
+                      asChild
+                      className="w-full bg-[oklch(0.72_0.17_72)] font-semibold text-[oklch(0.08_0.02_60)] hover:bg-[oklch(0.78_0.17_72)]"
+                    >
                       <Link
                         href={option.checkoutLink}
                         target="_blank"

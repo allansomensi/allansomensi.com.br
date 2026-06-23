@@ -4,45 +4,56 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Link from "next/link";
 
 export function Faq() {
   return (
-    <div
-      id="faq"
-      className="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:py-10"
-    >
-      <div className="space-y-2">
-        <h2 className="text-center text-4xl font-bold tracking-tighter">
-          Perguntas Frequentes
-        </h2>
-        <p className="text-muted-foreground max-w-2xl text-center">
-          Aqui estão as dúvidas mais comuns sobre aulas, produtos digitais e
-          agendamentos. Se não encontrar o que procura, sinta-se à vontade para
-          entrar em contato comigo.
-        </p>
-      </div>
-      <Accordion
-        className="bg-card dark:bg-card/50 w-full -space-y-px rounded-lg shadow"
-        collapsible
-        defaultValue="item-1"
-        type="single"
-      >
-        {questions.map((item) => (
-          <AccordionItem
-            className="relative border-x first:rounded-t-lg first:border-t last:rounded-b-lg last:border-b"
-            key={item.id}
-            value={item.id}
+    <section id="faq" className="w-full py-16 lg:py-24">
+      <div className="container mx-auto px-4">
+        <div className="mx-auto max-w-3xl">
+          {/* Header */}
+          <div className="mb-12 text-center">
+            <p className="eyebrow mb-3">Tire suas dúvidas</p>
+            <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+              Perguntas Frequentes
+            </h2>
+            <p className="text-muted-foreground mx-auto mt-4 max-w-xl text-lg">
+              Não encontrou o que procura?{" "}
+              <Link
+                href="/#contato"
+                className="text-[oklch(0.72_0.17_72)] hover:underline"
+              >
+                Entre em contato
+              </Link>
+              .
+            </p>
+          </div>
+
+          {/* Accordion */}
+          <Accordion
+            className="w-full space-y-2"
+            collapsible
+            defaultValue="item-1"
+            type="single"
           >
-            <AccordionTrigger className="px-4 py-4 text-left text-[15px] leading-6 hover:no-underline">
-              {item.title}
-            </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground px-4 pb-4">
-              {item.content}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
+            {questions.map((item) => (
+              <AccordionItem
+                key={item.id}
+                value={item.id}
+                className="rounded-xl border border-white/8 bg-[oklch(0.12_0.016_265)] px-6 transition-colors data-[state=open]:border-[oklch(0.72_0.17_72/0.25)] data-[state=open]:bg-[oklch(0.13_0.018_265)]"
+              >
+                <AccordionTrigger className="py-5 text-left text-sm leading-snug font-semibold text-white/85 hover:text-[oklch(0.72_0.17_72)] hover:no-underline data-[state=open]:text-[oklch(0.72_0.17_72)]">
+                  {item.title}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">
+                  {item.content}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -63,7 +74,7 @@ const questions = [
     id: "item-3",
     title: "Onde as aulas presenciais acontecem?",
     content:
-      "As aulas presenciais são realizadas a domicílio na casa do aluno ou na minha casa, aulas remotas são realizadas via Google Meet.",
+      "As aulas presenciais são realizadas a domicílio na casa do aluno ou na minha casa, em Bento Gonçalves (RS). Aulas remotas são realizadas via Google Meet.",
   },
   {
     id: "item-4",

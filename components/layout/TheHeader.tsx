@@ -34,97 +34,112 @@ export function TheHeader() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
-    <header className="bg-background supports-backdrop-filter:bg-background/90 sticky top-0 z-50 w-full border-b backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[oklch(0.08_0.018_265/0.95)] backdrop-blur-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6">
+        {/* Logo */}
         <div className="flex-1">
-          <Link href="/" className="flex items-center gap-2 text-lg font-bold">
+          <Link
+            href="/"
+            className="group flex items-center gap-3 text-lg font-bold"
+          >
             <Image
               src="/logo.svg"
-              height={50}
-              width={50}
+              height={38}
+              width={38}
               alt="Logo"
-              className="dark:invert"
+              className="invert transition-opacity group-hover:opacity-80"
             />
+            <span className="hidden text-sm font-bold tracking-widest text-white/70 uppercase sm:block">
+              Allan Somensi
+            </span>
           </Link>
         </div>
-        <nav className="hidden md:flex md:items-center md:gap-2">
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex md:items-center md:gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={buttonVariants({ variant: "ghost" })}
+              className={buttonVariants({
+                variant: "ghost",
+                className:
+                  "text-sm font-medium tracking-wide text-white/60 transition-colors hover:bg-white/5 hover:text-[oklch(0.72_0.17_72)]",
+              })}
             >
               {link.label}
             </Link>
           ))}
         </nav>
+
+        {/* Right side */}
         <div className="flex flex-1 items-center justify-end gap-3">
-          <Button
-            variant="default"
-            asChild
-            className="hidden xl:flex xl:justify-start"
+          <a
+            href="https://calendly.com/allansomensi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-2 rounded-md bg-[oklch(0.72_0.17_72)] px-4 py-2 text-sm font-semibold text-[oklch(0.08_0.02_60)] transition-all hover:scale-[1.02] hover:bg-[oklch(0.78_0.17_72)] active:scale-[0.98] xl:flex"
           >
-            <a
-              href="https://calendly.com/allansomensi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <CalendarPlus className="h-5 w-5" />
-              <span>Agende uma aula</span>
-            </a>
-          </Button>
+            <CalendarPlus className="h-4 w-4" />
+            <span>Agende uma aula</span>
+          </a>
+
           <ThemeToggle />
 
+          {/* Mobile menu */}
           <div className="md:hidden">
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-white/10 bg-white/5 text-white hover:bg-white/10"
+                >
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Abrir menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-1/2">
+              <SheetContent
+                side="right"
+                className="w-72 border-white/10 bg-[oklch(0.1_0.018_265)]"
+              >
                 <SheetHeader>
-                  <SheetTitle className="flex items-center gap-2">
+                  <SheetTitle className="flex items-center gap-3">
                     <Image
                       src="/logo.svg"
-                      height={30}
-                      width={30}
+                      height={28}
+                      width={28}
                       alt="Logo"
-                      className="dark:invert"
+                      className="invert"
                     />
-                    <span>Navegação</span>
+                    <span className="text-sm font-bold tracking-widest text-white/50 uppercase">
+                      Allan Somensi
+                    </span>
                   </SheetTitle>
                 </SheetHeader>
-                <nav className="mt-8 flex flex-col gap-2">
+                <nav className="mt-8 flex flex-col gap-1 px-2">
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsSheetOpen(false)}
-                      className={buttonVariants({
-                        variant: "ghost",
-                        className: "justify-start gap-3",
-                      })}
+                      className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-white/60 transition-colors hover:bg-white/5 hover:text-[oklch(0.72_0.17_72)]"
                     >
-                      <link.icon className="text-muted-foreground h-5 w-5" />
+                      <link.icon className="h-4 w-4 opacity-50" />
                       <span>{link.label}</span>
                     </Link>
                   ))}
-                  <Button
-                    asChild
-                    className="mt-4 justify-start gap-3"
+                  <div className="my-3 h-px bg-white/8" />
+                  <a
+                    href="https://calendly.com/allansomensi"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsSheetOpen(false)}
+                    className="flex items-center gap-3 rounded-md bg-[oklch(0.72_0.17_72)] px-3 py-2.5 text-sm font-semibold text-[oklch(0.08_0.02_60)] transition-all hover:bg-[oklch(0.78_0.17_72)]"
                   >
-                    <a
-                      href="https://calendly.com/allansomensi"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <CalendarPlus className="h-5 w-5" />
-                      <span>Agende uma aula</span>
-                    </a>
-                  </Button>
+                    <CalendarPlus className="h-4 w-4" />
+                    <span>Agende uma aula</span>
+                  </a>
                 </nav>
               </SheetContent>
             </Sheet>
