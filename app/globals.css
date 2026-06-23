@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -46,54 +44,6 @@
 :root {
   --radius: 0.5rem;
 
-  /* === LIGHT MODE === */
-  --background: oklch(0.97 0.005 60);
-  --foreground: oklch(0.1 0.02 60);
-
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.1 0.02 60);
-
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.1 0.02 60);
-
-  /* Amber/gold as primary — guitar strings */
-  --primary: oklch(0.62 0.165 72);
-  --primary-foreground: oklch(0.08 0.02 60);
-
-  --secondary: oklch(0.93 0.015 60);
-  --secondary-foreground: oklch(0.15 0.03 60);
-
-  --muted: oklch(0.93 0.01 60);
-  --muted-foreground: oklch(0.48 0.04 60);
-
-  --accent: oklch(0.93 0.015 60);
-  --accent-foreground: oklch(0.15 0.03 60);
-
-  /* Red accent */
-  --destructive: oklch(0.55 0.22 25);
-
-  --border: oklch(0.87 0.015 60);
-  --input: oklch(0.87 0.015 60);
-  --ring: oklch(0.62 0.165 72);
-
-  --chart-1: oklch(0.62 0.165 72);
-  --chart-2: oklch(0.55 0.22 25);
-  --chart-3: oklch(0.45 0.06 220);
-  --chart-4: oklch(0.75 0.12 80);
-  --chart-5: oklch(0.65 0.18 50);
-
-  --sidebar: oklch(0.95 0.008 60);
-  --sidebar-foreground: oklch(0.1 0.02 60);
-  --sidebar-primary: oklch(0.62 0.165 72);
-  --sidebar-primary-foreground: oklch(0.08 0.02 60);
-  --sidebar-accent: oklch(0.91 0.015 60);
-  --sidebar-accent-foreground: oklch(0.15 0.03 60);
-  --sidebar-border: oklch(0.87 0.015 60);
-  --sidebar-ring: oklch(0.62 0.165 72);
-}
-
-.dark {
-  /* === DARK MODE — primary experience === */
   --background: oklch(0.1 0.015 265);
   --foreground: oklch(0.92 0.01 70);
 
@@ -147,12 +97,7 @@
   }
 }
 
-header {
-  background: oklch(0.08 0.018 265 / 0.95) !important;
-  border-bottom-color: oklch(1 0 0 / 6%) !important;
-  backdrop-filter: blur(12px);
-}
-
+/* Custom Components */
 .string-divider {
   height: 2px;
   background: linear-gradient(

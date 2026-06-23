@@ -27,7 +27,7 @@ export function TheHero({ banners }: HeroBannerProps) {
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent className="h-[70vh] md:h-[88vh]">
+      <CarouselContent className="h-[85dvh] md:h-[95dvh]">
         {banners.map((banner, index) => (
           <CarouselItem key={banner._id}>
             <div className="relative h-full w-full overflow-hidden">
@@ -37,99 +37,67 @@ export function TheHero({ banners }: HeroBannerProps) {
                   src={urlFor(banner.image).width(1920).height(1080).url()}
                   alt={banner.imageAlt || banner.title || "Banner"}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-[10s] hover:scale-105"
                   priority={index === 0}
                 />
               )}
 
-              {/* Multi-layer overlay: dark base + amber vignette from bottom */}
-              <div className="absolute inset-0 bg-black/55" />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to top, oklch(0.08 0.018 265 / 0.9) 0%, oklch(0.08 0.018 265 / 0.3) 40%, transparent 70%)",
-                }}
-              />
-              {/* Subtle glow from bottom center */}
-              <div
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 70% 40% at 50% 100%, oklch(0.72 0.17 72 / 0.12) 0%, transparent 70%)",
-                }}
-              />
+              {/* Base dark overlay */}
+              <div className="absolute inset-0 bg-black/40" />
+
+              {/* Top gradient overlay */}
+              <div className="absolute inset-0 bg-linear-to-b from-[oklch(0.08_0.018_265/0.8)] from-0% to-transparent to-25%" />
+
+              {/* Bottom gradient overlay */}
+              <div className="absolute inset-0 bg-linear-to-t from-[oklch(0.08_0.018_265/0.95)] from-0% to-transparent to-30%" />
+
+              {/* Radial gradient overlay */}
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_50%_at_50%_50%,oklch(0.72_0.17_72/0.18)_0%,transparent_100%)]" />
 
               {/* Content */}
-              <div className="relative z-10 flex h-full w-full flex-col items-center justify-end px-4 pb-16 text-center md:pb-24">
-                {/* Eyebrow label */}
-                <p
-                  className="mb-4 text-xs font-bold tracking-[0.2em] uppercase select-none"
-                  style={{ color: "oklch(0.72 0.17 72)" }}
-                >
-                  Allan Somensi
-                </p>
+              <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center">
+                {/* Text Content Container */}
+                <div className="animate-in fade-in zoom-in-95 fill-mode-both flex flex-col items-center duration-1000">
+                  {/* Main title */}
+                  <h1 className="max-w-5xl text-5xl leading-[1.1] font-extrabold tracking-tight text-white drop-shadow-2xl select-none md:text-6xl lg:text-8xl">
+                    {banner.title}
+                  </h1>
 
-                {/* Main title */}
-                <h1 className="text-4xl leading-tight font-extrabold tracking-tight text-white drop-shadow-lg select-none md:text-6xl lg:text-7xl">
-                  {banner.title}
-                </h1>
+                  {/* Underline accent */}
+                  <div className="mt-8 h-1 w-24 rounded-full bg-[oklch(0.72_0.17_72)] shadow-[0_0_20px_oklch(0.72_0.17_72/0.6)]" />
 
-                {/* Underline accent */}
-                <div
-                  className="mt-5 h-0.5 w-16"
-                  style={{
-                    background: "oklch(0.72 0.17 72)",
-                  }}
-                />
+                  {/* Description */}
+                  {banner.description && (
+                    <p className="mt-8 max-w-2xl text-lg leading-relaxed font-medium text-white/80 drop-shadow-md select-none md:text-xl">
+                      {banner.description}
+                    </p>
+                  )}
 
-                {/* Description */}
-                {banner.description && (
-                  <p className="mt-5 max-w-lg text-base leading-relaxed text-white/70 select-none md:text-lg">
-                    {banner.description}
-                  </p>
-                )}
-
-                {/* CTA button */}
-                {banner.link && (
-                  <Link
-                    href={banner.link}
-                    target={
-                      banner.link.startsWith("http") ? "_blank" : undefined
-                    }
-                    rel={
-                      banner.link.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className="group mt-8 inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold transition-all select-none"
-                    style={{
-                      background: "oklch(0.72 0.17 72)",
-                      color: "oklch(0.08 0.02 60)",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background =
-                        "oklch(0.78 0.17 72)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background =
-                        "oklch(0.72 0.17 72)";
-                    }}
-                  >
-                    {banner.buttonText || "Saiba mais"}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                )}
+                  {/* CTA */}
+                  {banner.link && (
+                    <Link
+                      href={banner.link}
+                      target={
+                        banner.link.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel={
+                        banner.link.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="group mt-10 inline-flex items-center gap-3 rounded-full bg-[oklch(0.72_0.17_72)] px-8 py-4 text-sm font-bold text-[oklch(0.08_0.02_60)] shadow-[0_0_20px_rgba(235,80,160,0.2)] transition-all duration-300 select-none hover:scale-105 hover:bg-[oklch(0.78_0.17_72)] hover:shadow-[0_0_35px_rgba(235,80,160,0.4)]"
+                    >
+                      <span className="tracking-wide">
+                        {banner.buttonText || "Saiba mais"}
+                      </span>
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                  )}
+                </div>
               </div>
 
-              {/* Bottom line */}
-              <div
-                className="absolute right-0 bottom-0 left-0 h-px"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, oklch(0.72 0.17 72 / 0.5), transparent)",
-                }}
-              />
+              {/* Bottom edge string divider */}
+              <div className="absolute right-0 bottom-0 left-0 h-0.5 bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72/0.6)] to-transparent" />
             </div>
           </CarouselItem>
         ))}

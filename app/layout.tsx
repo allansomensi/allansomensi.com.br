@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/next";
 import { SanityLive } from "@/sanity/lib/live";
 
@@ -27,21 +26,13 @@ export default function RootLayout({
   return (
     <html
       lang="pt-br"
-      className="scroll-smooth"
+      className="dark scroll-smooth"
       data-scroll-behavior="smooth"
-      suppressHydrationWarning
     >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
         <SanityLive />
         <Analytics />
       </body>
