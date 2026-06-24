@@ -97,7 +97,7 @@
   }
 }
 
-/* Custom Components */
+/* ─── Amber string divider ─────────────────────────────────── */
 .string-divider {
   height: 2px;
   background: linear-gradient(
@@ -112,12 +112,28 @@
   margin: 0;
 }
 
+/* ─── Section amber divider (between home sections) ────────── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.72 0.17 72 / 0.15) 30%,
+    oklch(0.72 0.17 72 / 0.35) 50%,
+    oklch(0.72 0.17 72 / 0.15) 70%,
+    transparent 100%
+  );
+}
+
+/* ─── Typography ────────────────────────────────────────────── */
 h2.section-title {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 800;
 }
 
+/* ─── Cards ─────────────────────────────────────────────────── */
 [data-slot="card"] {
   border-color: oklch(1 0 0 / 7%) !important;
   background: oklch(0.13 0.018 265) !important;
@@ -137,12 +153,14 @@ h2.section-title {
   background: oklch(0.12 0.016 265) !important;
 }
 
+/* ─── Buttons ───────────────────────────────────────────────── */
 [data-slot="button"][class*="bg-primary"],
 button.bg-primary {
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
+/* ─── Badges ────────────────────────────────────────────────── */
 [data-slot="badge"] {
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -150,16 +168,19 @@ button.bg-primary {
   font-size: 0.65rem;
 }
 
+/* ─── Accordion ─────────────────────────────────────────────── */
 [data-slot="accordion-trigger"]:hover {
   color: oklch(0.72 0.17 72);
   text-decoration: none !important;
 }
 
+/* ─── Footer ────────────────────────────────────────────────── */
 footer {
   background: oklch(0.07 0.015 265) !important;
   border-top-color: oklch(1 0 0 / 8%) !important;
 }
 
+/* ─── Form inputs ───────────────────────────────────────────── */
 [data-slot="input"]:focus-visible,
 [data-slot="textarea"]:focus-visible {
   border-color: oklch(0.72 0.17 72) !important;
@@ -170,15 +191,19 @@ footer {
   background: oklch(0.72 0.17 72 / 0.4) !important;
 }
 
+/* ─── Pagination ────────────────────────────────────────────── */
 [data-slot="pagination-link"]:hover {
   color: oklch(0.72 0.17 72) !important;
 }
 
+/* ─── Utility classes ───────────────────────────────────────── */
 .text-amber {
   color: oklch(0.72 0.17 72);
 }
 
+/* Eyebrow label — small amber uppercase tag */
 .eyebrow {
+  display: block;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -186,6 +211,7 @@ footer {
   color: oklch(0.72 0.17 72);
 }
 
+/* Left amber border accent for cards */
 .plectrum-accent {
   position: relative;
   overflow: hidden;
@@ -200,4 +226,13 @@ footer {
   height: 100%;
   background: oklch(0.72 0.17 72);
   border-radius: 0 2px 2px 0;
+}
+
+/* Page header shared pattern (loja sub-pages, not-found) */
+.page-header-glow {
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 0%,
+    oklch(0.72 0.17 72 / 0.18) 0%,
+    transparent 70%
+  );
 }

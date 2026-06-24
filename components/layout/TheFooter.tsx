@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import packageJson from "@/package.json";
 
 function FooterLink({
   href,
@@ -48,7 +49,7 @@ export function TheFooter() {
 
       <div className="container mx-auto grid grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-2 md:grid-cols-4 md:px-6">
         {/* Brand */}
-        <div className="flex flex-col gap-5 sm:col-span-2 md:col-span-1">
+        <div className="flex flex-col items-center gap-5 text-center sm:col-span-2 sm:items-start sm:text-left md:col-span-1">
           <div className="flex items-center gap-3">
             <Image
               src="/logo.svg"
@@ -74,7 +75,7 @@ export function TheFooter() {
             Agende sua aula →
           </a>
           {/* Social icons */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-2 sm:justify-start">
             <SocialIcon
               href="https://instagram.com/allansomensi"
               label="Instagram"
@@ -121,7 +122,7 @@ export function TheFooter() {
         </div>
 
         {/* Shop */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
           <h4 className="mb-1 text-xs font-bold tracking-widest text-white/30 uppercase">
             Loja
           </h4>
@@ -131,7 +132,7 @@ export function TheFooter() {
         </div>
 
         {/* Nav */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
           <h4 className="mb-1 text-xs font-bold tracking-widest text-white/30 uppercase">
             Navegação
           </h4>
@@ -141,7 +142,7 @@ export function TheFooter() {
         </div>
 
         {/* Support */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
           <h4 className="mb-1 text-xs font-bold tracking-widest text-white/30 uppercase">
             Suporte
           </h4>
@@ -155,10 +156,15 @@ export function TheFooter() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/5 px-4 py-5 md:px-6">
-        <p className="text-center text-xs text-white/20">
-          © {new Date().getFullYear()} Allan Somensi. Todos os direitos
-          reservados.
-        </p>
+        <div className="container mx-auto flex flex-col items-center justify-between gap-3 md:flex-row">
+          <p className="text-center text-xs text-white/20">
+            © {new Date().getFullYear()} Allan Somensi. Todos os direitos
+            reservados.
+          </p>
+          <p className="text-center font-mono text-xs text-white/20">
+            v{packageJson.version}
+          </p>
+        </div>
       </div>
     </footer>
   );

@@ -35,7 +35,6 @@ export function TheHeader() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Gatilho rápido (20px) para a animação começar logo que o usuário sair do topo absoluto
       setIsScrolled(window.scrollY > 20);
     };
 

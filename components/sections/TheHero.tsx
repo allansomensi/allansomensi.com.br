@@ -56,9 +56,7 @@ export function TheHero({ banners }: HeroBannerProps) {
 
               {/* Content */}
               <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center">
-                {/* Text Content Container */}
                 <div className="animate-in fade-in zoom-in-95 fill-mode-both flex flex-col items-center duration-1000">
-                  {/* Main title */}
                   <h1 className="max-w-5xl text-5xl leading-[1.1] font-extrabold tracking-tight text-white drop-shadow-2xl select-none md:text-6xl lg:text-8xl">
                     {banner.title}
                   </h1>
@@ -66,14 +64,12 @@ export function TheHero({ banners }: HeroBannerProps) {
                   {/* Underline accent */}
                   <div className="mt-8 h-1 w-24 rounded-full bg-[oklch(0.72_0.17_72)] shadow-[0_0_20px_oklch(0.72_0.17_72/0.6)]" />
 
-                  {/* Description */}
                   {banner.description && (
                     <p className="mt-8 max-w-2xl text-lg leading-relaxed font-medium text-white/80 drop-shadow-md select-none md:text-xl">
                       {banner.description}
                     </p>
                   )}
 
-                  {/* CTA */}
                   {banner.link && (
                     <Link
                       href={banner.link}
@@ -85,7 +81,7 @@ export function TheHero({ banners }: HeroBannerProps) {
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      className="group mt-10 inline-flex items-center gap-3 rounded-full bg-[oklch(0.72_0.17_72)] px-8 py-4 text-sm font-bold text-[oklch(0.08_0.02_60)] shadow-[0_0_20px_rgba(235,80,160,0.2)] transition-all duration-300 select-none hover:scale-105 hover:bg-[oklch(0.78_0.17_72)] hover:shadow-[0_0_35px_rgba(235,80,160,0.4)]"
+                      className="group mt-10 inline-flex items-center gap-3 rounded-full bg-[oklch(0.72_0.17_72)] px-8 py-4 text-sm font-bold text-[oklch(0.08_0.02_60)] shadow-[0_0_20px_oklch(0.72_0.17_72/0.25)] transition-all duration-300 select-none hover:scale-105 hover:bg-[oklch(0.78_0.17_72)] hover:shadow-[0_0_35px_oklch(0.72_0.17_72/0.4)]"
                     >
                       <span className="tracking-wide">
                         {banner.buttonText || "Saiba mais"}
@@ -96,7 +92,7 @@ export function TheHero({ banners }: HeroBannerProps) {
                 </div>
               </div>
 
-              {/* Bottom edge string divider */}
+              {/* Bottom edge divider */}
               <div className="absolute right-0 bottom-0 left-0 h-0.5 bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72/0.6)] to-transparent" />
             </div>
           </CarouselItem>
