@@ -27,7 +27,7 @@ export function TheHero({ banners }: HeroBannerProps) {
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent className="h-[85dvh] md:h-[95dvh]">
+      <CarouselContent className="h-[85svh] md:h-[95dvh]">
         {banners.map((banner, index) => (
           <CarouselItem key={banner._id}>
             <div className="relative h-full w-full overflow-hidden">
