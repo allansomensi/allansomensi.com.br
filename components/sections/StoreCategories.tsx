@@ -3,36 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const CATEGORIES = [
-  {
-    title: "Backing Tracks",
-    description:
-      "Faixas em alta qualidade para tocar junto e treinar o seu som.",
-    image: "/categories/backing-tracks.png",
-    href: "/loja/backing-tracks",
-    tags: [".mp3", ".wav", "Rock · Blues · Metal"],
-    number: "01",
-  },
-  {
-    title: "Presets de Timbre",
-    description: "Timbres prontos para usar na sua pedaleira digital.",
-    image: "/categories/presets.png",
-    href: "/loja/presets",
-    tags: ["Helix · Kemper", "Timbres de artistas", "Personalizados"],
-    number: "02",
-  },
-  {
-    title: "Tablaturas & PDFs",
-    description:
-      "Transcrições, arranjos e exercícios para acelerar seu estudo.",
-    image: "/categories/tablaturas.png",
-    href: "/loja/tablaturas",
-    tags: [".pdf", ".gpx", "Solos & arranjos"],
-    number: "03",
-  },
-];
+export interface StoreHighlight {
+  _id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  imageAlt: string;
+  href: string;
+  tags?: string[];
+  order: number;
+}
 
-export function StoreCategories() {
+interface StoreCategoriesProps {
+  highlights: StoreHighlight[];
+}
+
+export function StoreCategories({ highlights }: StoreCategoriesProps) {
   return (
     <section className="py-16 lg:py-24">
       <div className="container mx-auto px-4">
@@ -60,23 +46,23 @@ export function StoreCategories() {
 
         {/* Category cards */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {CATEGORIES.map((cat) => (
+          {highlights.map((cat, index) => (
             <Link
-              key={cat.title}
+              key={cat._id}
               href={cat.href}
               className="group relative flex flex-col overflow-hidden rounded-xl border border-white/8 bg-[oklch(0.12_0.016_265)] transition-all hover:border-[oklch(0.72_0.17_72/0.35)] hover:shadow-[0_0_0_1px_oklch(0.72_0.17_72/0.1),0_12px_40px_oklch(0_0_0/0.5)]"
             >
               {/* Number label */}
               <span className="absolute top-4 right-4 z-10 font-mono text-xs font-bold tracking-widest text-white/20">
-                {cat.number}
+                {String(index + 1).padStart(2, "0")}
               </span>
 
               {/* Image */}
               <div className="relative h-52 w-full overflow-hidden">
                 <Image
-                  src={cat.image}
+                  src={cat.imageUrl}
                   fill
-                  alt={cat.title}
+                  alt={cat.imageAlt}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -91,16 +77,18 @@ export function StoreCategories() {
                 </p>
 
                 {/* Tags */}
-                <div className="mb-6 flex flex-wrap gap-2">
-                  {cat.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/50"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                {cat.tags && cat.tags.length > 0 && (
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {cat.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/50"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 {/* CTA */}
                 <div className="transition-gap mt-auto flex items-center gap-1.5 text-sm font-semibold text-[oklch(0.72_0.17_72)] group-hover:gap-2.5">

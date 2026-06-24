@@ -113,3 +113,17 @@ export const aboutImageQuery = groq`
     "imageAlt": image.alt
   }
 `;
+
+export const storeHighlightsQuery = groq`
+  *[_type == "storeHighlight" && active == true] | order(order asc) {
+    _id,
+    title,
+    description,
+    image,
+    "imageUrl": image.asset->url,
+    "imageAlt": image.alt,
+    href,
+    tags,
+    order
+  }
+`;
