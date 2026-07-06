@@ -40,7 +40,7 @@ export function Faq() {
               <AccordionItem
                 key={item.id}
                 value={item.id}
-                className="rounded-xl border border-white/8 bg-[oklch(0.12_0.016_265)] px-6 transition-colors data-[state=open]:border-[oklch(0.72_0.17_72/0.25)] data-[state=open]:bg-[oklch(0.13_0.018_265)]"
+                className="stage-card rounded-xl border px-6 data-[state=open]:border-[oklch(0.72_0.17_72/0.25)] data-[state=open]:bg-(--surface-2)"
               >
                 <AccordionTrigger className="py-5 text-left text-sm leading-snug font-semibold text-white/85 hover:text-[oklch(0.72_0.17_72)] hover:no-underline data-[state=open]:text-[oklch(0.72_0.17_72)]">
                   {item.title}

@@ -86,6 +86,18 @@
   --sidebar-accent-foreground: oklch(0.88 0.01 70);
   --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.72 0.17 72);
+
+  /* ─── Unified "stage" surface tokens ──────────────────────
+     Single source of truth for the dark-stage surfaces used
+     across sections, cards and modals. Every component below
+     should reference these instead of hardcoding its own
+     oklch(0.11 / 0.12 / 0.13 ...) one-off. */
+  --surface-1: oklch(0.12 0.016 265); /* section cards, list items */
+  --surface-2: oklch(0.13 0.018 265); /* nested panels, active/hover states */
+  --surface-3: oklch(0.11 0.016 265); /* modals, overlays, sheets */
+  --surface-border: oklch(1 0 0 / 8%);
+  --surface-border-hover: oklch(0.72 0.17 72 / 0.35);
+  --glow: oklch(0.72 0.17 72 / 0.18);
 }
 
 @layer base {
@@ -133,24 +145,24 @@ h2.section-title {
   font-weight: 800;
 }
 
-/* ─── Cards ─────────────────────────────────────────────────── */
+/* ─── Cards (shadcn primitive) ──────────────────────────────── */
 [data-slot="card"] {
-  border-color: oklch(1 0 0 / 7%) !important;
-  background: oklch(0.13 0.018 265) !important;
+  border-color: var(--surface-border) !important;
+  background: var(--card) !important;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 [data-slot="card"]:hover {
-  border-color: oklch(0.72 0.17 72 / 0.35) !important;
+  border-color: var(--surface-border-hover) !important;
   box-shadow:
     0 0 0 1px oklch(0.72 0.17 72 / 0.12),
     0 8px 32px oklch(0 0 0 / 0.4);
 }
 
 .product-card-wrapper [data-slot="card"] {
-  background: oklch(0.12 0.016 265) !important;
+  background: var(--surface-1) !important;
 }
 
 /* ─── Buttons ───────────────────────────────────────────────── */
@@ -177,7 +189,7 @@ button.bg-primary {
 /* ─── Footer ────────────────────────────────────────────────── */
 footer {
   background: oklch(0.07 0.015 265) !important;
-  border-top-color: oklch(1 0 0 / 8%) !important;
+  border-top-color: var(--surface-border) !important;
 }
 
 /* ─── Form inputs ───────────────────────────────────────────── */
@@ -232,7 +244,30 @@ footer {
 .page-header-glow {
   background: radial-gradient(
     ellipse 70% 60% at 50% 0%,
-    oklch(0.72 0.17 72 / 0.18) 0%,
+    var(--glow) 0%,
     transparent 70%
   );
+}
+
+.stage-card {
+  border: 1px solid var(--surface-border);
+  background: var(--surface-1);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stage-card:hover {
+  border-color: var(--surface-border-hover);
+  box-shadow:
+    0 0 0 1px oklch(0.72 0.17 72 / 0.1),
+    0 12px 40px oklch(0 0 0 / 0.5);
+}
+
+.stage-panel {
+  background: var(--surface-2);
+}
+
+.stage-modal {
+  background: var(--surface-3);
 }

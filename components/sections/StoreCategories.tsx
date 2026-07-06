@@ -48,9 +48,9 @@ export function StoreCategories({ highlights }: StoreCategoriesProps) {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {highlights.map((cat, index) => (
             <Link
-              key={cat._id}
+               key={cat._id}
               href={cat.href}
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-white/8 bg-[oklch(0.12_0.016_265)] transition-all hover:border-[oklch(0.72_0.17_72/0.35)] hover:shadow-[0_0_0_1px_oklch(0.72_0.17_72/0.1),0_12px_40px_oklch(0_0_0/0.5)]"
+              className="stage-card group relative flex flex-col overflow-hidden rounded-xl"
             >
               {/* Number label */}
               <span className="absolute top-4 right-4 z-10 font-mono text-xs font-bold tracking-widest text-white/20">
@@ -66,7 +66,7 @@ export function StoreCategories({ highlights }: StoreCategoriesProps) {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-[oklch(0.12_0.016_265)] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-(--surface-1) via-transparent to-transparent" />
               </div>
 
               {/* Content */}
@@ -78,18 +78,17 @@ export function StoreCategories({ highlights }: StoreCategoriesProps) {
 
                 {/* Tags */}
                 {cat.tags && cat.tags.length > 0 && (
-                  <div className="mb-6 flex flex-wrap gap-2">
-                    {cat.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/50"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
+                <div className="mb-6 flex flex-wrap gap-2">
+                  {cat.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/50"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
                 {/* CTA */}
                 <div className="transition-gap mt-auto flex items-center gap-1.5 text-sm font-semibold text-[oklch(0.72_0.17_72)] group-hover:gap-2.5">
                   Ver produtos

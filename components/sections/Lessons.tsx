@@ -54,10 +54,10 @@ export function Lessons() {
             return (
               <div
                 key={lesson.title}
-                className={`plectrum-accent relative flex flex-col rounded-xl border p-7 transition-all ${
+                className={`plectrum-accent relative flex flex-col rounded-xl p-7 transition-all ${
                   lesson.highlight
-                    ? "border-[oklch(0.72_0.17_72/0.4)] bg-[oklch(0.13_0.018_265)]"
-                    : "border-white/8 bg-[oklch(0.12_0.016_265)]"
+                    ? "stage-panel border border-[oklch(0.72_0.17_72/0.4)]"
+                    : "stage-card"
                 }`}
               >
                 {lesson.highlight && (

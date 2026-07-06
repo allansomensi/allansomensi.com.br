@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 
+const CALENDLY_LINK = "https://calendly.com/allansomensi";
+
 const navLinks = [
   { href: "/", label: "Início", icon: Home },
   { href: "/#aulas", label: "Aulas", icon: BookTextIcon },
@@ -92,10 +94,10 @@ export function TheHeader() {
         {/* Right side */}
         <div className="flex flex-1 items-center justify-end gap-3">
           <a
-            href="https://calendly.com/allansomensi"
+            href={CALENDLY_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="group hidden items-center gap-2 rounded-md bg-[oklch(0.72_0.17_72)] px-5 py-2.5 text-sm font-bold text-[oklch(0.08_0.02_60)] shadow-[0_0_15px_rgba(235,80,160,0.15)] transition-all duration-300 hover:scale-105 hover:bg-[oklch(0.78_0.17_72)] hover:shadow-[0_0_25px_rgba(235,80,160,0.3)] xl:flex"
+            className="group hidden items-center gap-2 rounded-md bg-[oklch(0.72_0.17_72)] px-5 py-2.5 text-sm font-bold text-[oklch(0.08_0.02_60)] shadow-[0_0_15px_rgba(235,80,160,0.15)] transition-all duration-300 hover:scale-105 hover:bg-[oklch(0.78_0.17_72)] hover:shadow-[0_0_25px_rgba(235,80,160,0.3)] md:flex"
           >
             <CalendarPlus className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12" />
             <span>Agende uma aula</span>
@@ -148,7 +150,7 @@ export function TheHeader() {
                   ))}
                   <div className="my-4 h-px w-full bg-white/10" />
                   <a
-                    href="https://calendly.com/allansomensi"
+                    href={CALENDLY_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsSheetOpen(false)}

@@ -58,7 +58,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-white/8 bg-[oklch(0.12_0.016_265)] transition-all hover:border-[oklch(0.72_0.17_72/0.35)] hover:shadow-[0_0_0_1px_oklch(0.72_0.17_72/0.08),0_12px_40px_oklch(0_0_0/0.5)]">
+        <div className="stage-card group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl">
           {/* Image */}
           <div className="relative aspect-video w-full overflow-hidden">
             <Image
@@ -121,7 +121,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </DialogTrigger>
 
       {/* Modal */}
-      <DialogContent className="flex max-h-[90vh] flex-col border-white/10 bg-[oklch(0.11_0.016_265)] sm:max-w-3xl">
+      <DialogContent className="stage-modal flex max-h-[90vh] flex-col border-white/10 sm:max-w-3xl">
         <DialogHeader>
           <div className="mb-2 flex items-center gap-2">
             <span className="flex items-center gap-1.5 rounded-full border border-[oklch(0.72_0.17_72/0.3)] bg-[oklch(0.72_0.17_72/0.1)] px-2.5 py-1 text-xs font-semibold text-[oklch(0.72_0.17_72)]">
@@ -178,7 +178,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 {product.purchaseOptions.map((option) => (
                   <div
                     key={option._key}
-                    className="plectrum-accent rounded-xl border border-white/8 bg-[oklch(0.13_0.018_265)] p-5 transition-colors hover:border-[oklch(0.72_0.17_72/0.3)]"
+                    className="plectrum-accent stage-panel rounded-xl border border-white/8 p-5 transition-colors hover:border-[oklch(0.72_0.17_72/0.3)]"
                   >
                     <div className="mb-4">
                       <h5 className="font-bold">{option.name}</h5>
