@@ -1,52 +1,74 @@
 import { NextResponse } from "next/server";
-import MailerLite from "@mailerlite/mailerlite-nodejs";
 
-const mailerlite = new MailerLite({
-  api_key: process.env.MAILERLITE_API_KEY || "",
-});
+const KIT_API_BASE = "https://api.kit.com/v4";
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
-    const groupId = process.env.MAILERLITE_GROUP_ID;
+    const bodyText = await request.text();
+    const { email } = JSON.parse(bodyText);
 
-    if (!email || !groupId) {
+    const apiKey = process.env.KIT_API_KEY;
+    const formId = process.env.KIT_FORM_ID;
+
+    if (!email || !apiKey || !formId) {
+      console.error(`Variáveis: API Key [${!!apiKey}], Form ID [${!!formId}]`);
       return NextResponse.json(
-        { error: "E-mail ou ID do grupo não configurado." },
+        { error: "Configuração do servidor incompleta." },
         { status: 400 },
       );
     }
 
-    const params = {
-      email,
-      groups: [groupId],
-      status: "active" as const,
+    const kitHeaders = {
+      "Content-Type": "application/json",
+      "X-Kit-Api-Key": apiKey,
     };
 
-    await mailerlite.subscribers.createOrUpdate(params);
+    const createResponse = await fetch(`${KIT_API_BASE}/subscribers`, {
+      method: "POST",
+      headers: kitHeaders,
+      body: JSON.stringify({ email_address: email }),
+    });
+
+    const createText = await createResponse.text();
+
+    if (!createResponse.ok) {
+      console.error(
+        `Kit recusou a criação do subscriber (Status ${createResponse.status}):\n${createText.substring(0, 500)}`,
+      );
+      return NextResponse.json(
+        { error: "Falha ao registrar o e-mail." },
+        { status: createResponse.status },
+      );
+    }
+
+    const addToFormResponse = await fetch(
+      `${KIT_API_BASE}/forms/${formId}/subscribers`,
+      {
+        method: "POST",
+        headers: kitHeaders,
+        body: JSON.stringify({ email_address: email }),
+      },
+    );
+
+    const addToFormText = await addToFormResponse.text();
+
+    if (!addToFormResponse.ok) {
+      console.error(
+        `Kit recusou a inscrição no form (Status ${addToFormResponse.status}):\n${addToFormText.substring(0, 500)}`,
+      );
+      return NextResponse.json(
+        { error: "Falha ao inscrever o e-mail na newsletter." },
+        { status: addToFormResponse.status },
+      );
+    }
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error: unknown) {
-    if (
-      error &&
-      typeof error === "object" &&
-      "response" in error &&
-      error.response &&
-      typeof error.response === "object" &&
-      "data" in error.response
-    ) {
-      console.error(
-        "Erro na API do MailerLite (data):",
-        (error as { response: { data: unknown } }).response.data,
-      );
-    } else if (error instanceof Error) {
-      console.error("Erro na API do MailerLite (message):", error.message);
-    } else {
-      console.error("Erro desconhecido na API do MailerLite:", error);
+    if (error instanceof Error) {
+      console.error("Erro interno na Route Handler:", error.message);
     }
-
     return NextResponse.json(
-      { error: "Falha ao inscrever o e-mail." },
+      { error: "Falha na comunicação com o servidor." },
       { status: 500 },
     );
   }

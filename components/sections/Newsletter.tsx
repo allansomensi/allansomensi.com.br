@@ -34,15 +34,27 @@ export function Newsletter() {
         body: JSON.stringify({ email }),
       });
 
-      const data = await res.json();
+      if (!res.ok) {
+        let errorMessage = "Algo deu errado ao processar sua inscrição.";
 
-      if (res.ok) {
-        setMessage("Sucesso! Você está inscrito.");
-        setStatus("success");
-        setEmail("");
-      } else {
-        throw new Error(data.error || "Algo deu errado.");
+        try {
+          const errorData = await res.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          console.error(
+            "O servidor retornou um erro não-JSON. Status:",
+            res.status,
+          );
+        }
+
+        throw new Error(errorMessage);
       }
+
+      await res.json();
+
+      setMessage("Sucesso! Você está inscrito.");
+      setStatus("success");
+      setEmail("");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setMessage(error.message);
