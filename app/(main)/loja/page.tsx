@@ -29,10 +29,10 @@ export default async function Loja() {
         active="/loja"
         title={
           <>
-            Materiais para o seu <span className="accent">estudo</span>.
+            <span className="accent">Loja</span>
           </>
         }
-        description="Tablaturas, backing tracks e presets preparados com cuidado. Depois da compra, o link para download chega direto no seu e-mail."
+        description="Tablaturas, backing tracks e presets. Depois da compra, o link para download chega no seu e-mail."
       />
 
       <div className="shell py-4 lg:py-8">

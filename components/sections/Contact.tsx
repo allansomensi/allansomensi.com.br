@@ -9,21 +9,18 @@ const CHANNELS = [
     icon: MessageCircle,
     label: "WhatsApp",
     value: site.whatsapp.display,
-    hint: "Resposta mais rápida",
     href: site.whatsapp.href,
   },
   {
     icon: Mail,
     label: "E-mail",
     value: site.email,
-    hint: "Parcerias e orçamentos",
     href: `mailto:${site.email}`,
   },
   {
     icon: InstagramIcon,
     label: "Instagram",
     value: "@allansomensi",
-    hint: "Bastidores e novidades",
     href: site.socials.instagram,
   },
 ];
@@ -32,8 +29,8 @@ export function Contact() {
   return (
     <section id="contato" className="section-y w-full pt-0 lg:pt-0">
       <div className="shell">
-        <div className="panel reveal relative overflow-hidden p-6 sm:p-10 lg:p-14">
-          <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,oklch(0.8_0.145_74/0.14),transparent_65%)]" />
+        <div className="reveal sm:panel relative sm:overflow-hidden sm:p-10 lg:p-14">
+          <div className="pointer-events-none absolute -top-40 left-1/2 hidden h-80 w-[60rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,oklch(0.8_0.145_74/0.14),transparent_65%)]" />
 
           <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
@@ -42,10 +39,10 @@ export function Contact() {
                 eyebrow="Contato"
                 title={
                   <>
-                    Vamos <span className="accent">conversar</span>?
+                    Fale <span className="accent">comigo</span>
                   </>
                 }
-                description="Dúvidas sobre aulas, produtos, shows ou parcerias — escolha o canal que preferir."
+                description="Tem alguma dúvida? Manda uma mensagem."
               />
 
               <ul className="mt-10 grid grid-cols-1 gap-3">
@@ -58,24 +55,20 @@ export function Contact() {
                         href={channel.href}
                         target={external ? "_blank" : undefined}
                         rel={external ? "noopener noreferrer" : undefined}
-                        className="group border-line hover:border-primary/40 flex items-center gap-4 rounded-2xl border bg-white/[0.02] p-4 transition-all duration-300 hover:bg-white/[0.04] sm:p-5"
+                        className="group border-line hover:border-primary/40 flex items-center gap-3 rounded-2xl border bg-white/[0.02] p-3.5 transition-all duration-300 hover:bg-white/[0.04] sm:gap-4 sm:p-5"
                       >
-                        <span className="border-line-strong group-hover:border-primary/40 group-hover:bg-primary/15 group-hover:text-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-colors">
+                        <span className="border-line-strong group-hover:border-primary/40 group-hover:bg-primary/15 group-hover:text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-colors sm:h-11 sm:w-11">
                           <Icon className="h-[18px] w-[18px]" />
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="text-subtle block font-mono text-[0.65rem] tracking-[0.15em] uppercase">
                             {channel.label}
-                            <span className="hidden sm:inline">
-                              {" "}
-                              · {channel.hint}
-                            </span>
                           </span>
                           <span className="group-hover:text-primary mt-0.5 block truncate font-medium transition-colors sm:text-lg">
                             {channel.value}
                           </span>
                         </span>
-                        <ArrowUpRight className="text-subtle group-hover:text-primary h-4 w-4 shrink-0 transition-all duration-300 group-hover:rotate-45" />
+                        <ArrowUpRight className="text-subtle group-hover:text-primary hidden h-4 w-4 shrink-0 transition-all duration-300 group-hover:rotate-45 sm:block" />
                       </a>
                     </li>
                   );
@@ -83,7 +76,7 @@ export function Contact() {
               </ul>
             </div>
 
-            {/* QR code — útil só em telas grandes, para abrir no celular */}
+            {/* QR code: só faz sentido em telas grandes, para abrir no celular */}
             <div className="hidden lg:col-span-5 lg:flex lg:justify-end">
               <a
                 href={site.whatsapp.href}
@@ -102,10 +95,10 @@ export function Contact() {
                 </span>
                 <span className="text-center">
                   <span className="block text-sm font-medium">
-                    Aponte a câmera do celular
+                    Escaneie com o celular
                   </span>
                   <span className="text-subtle block font-mono text-[0.65rem] tracking-[0.15em] uppercase">
-                    e fale comigo no WhatsApp
+                    para abrir o WhatsApp
                   </span>
                 </span>
               </a>

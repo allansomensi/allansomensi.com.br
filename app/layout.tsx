@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     template: "%s | Allan Somensi",
-    default: "Allan Somensi — Guitarrista e professor de guitarra e violão",
+    default: "Allan Somensi - Guitarrista e professor de guitarra e violão",
   },
   description:
     "Site oficial de Allan Somensi. Aulas de guitarra e violão presenciais em Bento Gonçalves (RS) e online, tablaturas, backing tracks, presets e agenda de shows.",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Allan Somensi — Guitarrista",
+    title: "Allan Somensi - Guitarrista",
     description:
       "Aulas de guitarra e violão, produtos digitais para guitarristas e agenda de shows.",
     url: siteUrl,
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Allan Somensi — Guitarrista",
+    title: "Allan Somensi - Guitarrista",
     description: "Aulas de guitarra e violão, materiais de estudo e contato.",
   },
 };

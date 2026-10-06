@@ -72,7 +72,7 @@ function SheetContent({
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
+        <SheetPrimitive.Close className="border-line bg-surface-2/80 text-foreground/70 hover:text-foreground hover:border-line-strong absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border backdrop-blur-md transition-colors disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
           <XIcon className="size-4" />
           <span className="sr-only">Fechar</span>
         </SheetPrimitive.Close>

@@ -54,7 +54,7 @@ function HeroFrame({
       {...props}
     >
       <h1 className="sr-only">
-        {site.name} — guitarrista e professor de guitarra e violão em Bento
+        {site.name}, guitarrista e professor de guitarra e violão em Bento
         Gonçalves (RS) e online
       </h1>
       {children}
@@ -92,7 +92,7 @@ function HeroCopy({
           </p>
         )}
         {children && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both mt-10 flex flex-wrap items-center gap-3 delay-300 duration-1000">
+          <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both mt-8 grid grid-cols-1 gap-3 delay-300 duration-1000 sm:mt-10 sm:flex sm:flex-wrap sm:items-center">
             {children}
           </div>
         )}
@@ -105,12 +105,12 @@ function ScrollCue() {
   return (
     <a
       href="#aulas"
-      className="text-foreground/50 hover:text-primary hidden items-center gap-3 font-mono text-[0.65rem] tracking-[0.2em] uppercase transition-colors md:inline-flex"
+      aria-label="Ir para as aulas"
+      className="text-foreground/50 hover:text-primary hidden transition-colors md:inline-flex"
     >
       <span className="border-line-strong flex h-9 w-9 items-center justify-center rounded-full border">
         <ArrowDown className="h-3.5 w-3.5 animate-bounce" />
       </span>
-      Role para descobrir
     </a>
   );
 }
@@ -133,18 +133,17 @@ function StaticHero() {
         eyebrow={`${site.name} · ${site.location}`}
         title={
           <>
-            Aulas de guitarra e violão,{" "}
-            <span className="accent">no seu ritmo</span>.
+            Aulas de <span className="accent">guitarra e violão</span>
           </>
         }
-        description="Sou guitarrista e professor em Bento Gonçalves (RS). Dou aulas presenciais e online e compartilho por aqui alguns materiais de estudo: tablaturas, backing tracks e presets."
+        description="Sou guitarrista e dou aulas em Bento Gonçalves (RS) e online. Por aqui também vendo tablaturas, backing tracks e presets."
       >
         <ActionLink href={site.calendly.base} size="lg">
           Agendar uma aula
           <ArrowRight className="transition-transform group-hover/action:translate-x-0.5" />
         </ActionLink>
         <ActionLink href="/loja" size="lg" variant="secondary">
-          Explorar a loja
+          Ver a loja
         </ActionLink>
       </HeroCopy>
     </HeroFrame>
@@ -306,11 +305,11 @@ export function TheHero({ banners }: HeroBannerProps) {
           )}
           {banner.link?.startsWith("/loja") ? (
             <ActionLink href="/#aulas" size="lg" variant="secondary">
-              Conheça as aulas
+              Ver as aulas
             </ActionLink>
           ) : (
             <ActionLink href="/loja" size="lg" variant="secondary">
-              Explorar a loja
+              Ver a loja
             </ActionLink>
           )}
         </HeroCopy>

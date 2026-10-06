@@ -89,10 +89,10 @@ export function TheHeader() {
           <Link
             href="/"
             className="group flex items-center gap-3"
-            aria-label={`${site.name} — página inicial`}
+            aria-label={`${site.name}, página inicial`}
           >
             <Logo className="text-foreground group-hover:text-primary h-7 w-auto transition-colors duration-300" />
-            <span className="hidden flex-col leading-none sm:flex">
+            <span className="flex flex-col leading-none">
               <span className="text-[0.95rem] font-semibold tracking-tight">
                 {site.name}
               </span>
@@ -139,10 +139,11 @@ export function TheHeader() {
             <ActionLink
               href={site.calendly.base}
               size="sm"
-              className="hidden sm:inline-flex"
+              className="w-9 px-0 sm:w-auto sm:px-4"
+              aria-label="Agendar aula"
             >
               <CalendarPlus />
-              Agendar aula
+              <span className="hidden sm:inline">Agendar aula</span>
             </ActionLink>
 
             {/* Menu mobile */}

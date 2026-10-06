@@ -36,10 +36,11 @@ export function StoreCategories({ highlights }: StoreCategoriesProps) {
             eyebrow="Loja"
             title={
               <>
-                Materiais para o seu <span className="accent">estudo</span>
+                Tablaturas, backing tracks e{" "}
+                <span className="accent">presets</span>
               </>
             }
-            description="Tablaturas, backing tracks e presets preparados com cuidado. O download chega no seu e-mail logo após a compra."
+            description="Depois da compra, o link para download chega no seu e-mail."
           />
           <ActionLink href="/loja" variant="secondary" className="reveal">
             Ver toda a loja
@@ -47,12 +48,12 @@ export function StoreCategories({ highlights }: StoreCategoriesProps) {
           </ActionLink>
         </div>
 
-        <ul className="mt-14 grid gap-5 md:grid-cols-3">
+        <ul className="mt-10 grid grid-cols-1 gap-4 sm:mt-14 sm:gap-5 md:grid-cols-3">
           {items.map((item, index) => (
             <li key={item._id} className="reveal">
               <Link
                 href={item.href}
-                className="group border-line bg-surface-1 ease-out-expo hover:border-primary/40 relative flex aspect-4/5 flex-col justify-end overflow-hidden rounded-2xl border transition-all duration-500 sm:aspect-3/4 md:aspect-4/5"
+                className="group border-line bg-surface-1 ease-out-expo hover:border-primary/40 relative flex aspect-[5/4] flex-col justify-end overflow-hidden rounded-2xl border transition-all duration-500 sm:aspect-[16/10] md:aspect-4/5"
               >
                 {item.imageUrl ? (
                   <Image

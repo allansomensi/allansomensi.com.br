@@ -13,7 +13,7 @@ const QUESTIONS = [
     id: "agendamento",
     title: "Como funciona o agendamento das aulas?",
     content:
-      "Basta clicar em “Agendar aula” e escolher o melhor horário pelo Calendly. Você recebe um e-mail de confirmação com todos os detalhes logo após o agendamento. Se preferir, também é possível agendar pelo WhatsApp.",
+      "Clique em “Agendar aula” e escolha um horário no Calendly. Depois do agendamento você recebe um e-mail de confirmação. Se preferir, dá para marcar pelo WhatsApp também.",
   },
   {
     id: "cancelamento",
@@ -31,19 +31,18 @@ const QUESTIONS = [
     id: "entrega",
     title: "Como recebo os produtos digitais após a compra?",
     content:
-      "Logo após a confirmação do pagamento, você recebe um e-mail automático com um link seguro para baixar os arquivos. Se não encontrar, verifique a caixa de spam.",
+      "Assim que o pagamento é confirmado, chega um e-mail com o link para baixar os arquivos. Se não aparecer, dá uma olhada no spam.",
   },
   {
     id: "pagamento",
     title: "Quais formas de pagamento são aceitas?",
-    content:
-      "Para produtos digitais e aulas, aceito pagamentos via cartão de crédito e Pix.",
+    content: "Cartão de crédito e Pix, tanto para as aulas quanto para a loja.",
   },
   {
     id: "formatos",
     title: "Em quais formatos os arquivos da loja são entregues?",
     content:
-      "As backing tracks são entregues em MP3 ou WAV de alta qualidade. As tablaturas estão disponíveis em PDF e, na maioria dos casos, também em Guitar Pro (.gpx ou .gp5). Confira a descrição de cada produto para mais detalhes.",
+      "As backing tracks vêm em MP3 ou WAV. As tablaturas vêm em PDF e, na maioria dos casos, também em Guitar Pro (.gpx ou .gp5). Cada produto informa os formatos na descrição.",
   },
 ];
 
@@ -60,7 +59,6 @@ export function Faq() {
                 Perguntas <span className="accent">frequentes</span>
               </>
             }
-            description="Tudo o que você precisa saber sobre aulas, pagamentos e produtos digitais."
           />
 
           <a
@@ -74,10 +72,10 @@ export function Faq() {
             </span>
             <span className="flex-1">
               <span className="block text-sm font-semibold">
-                Não encontrou sua dúvida?
+                Não achou sua dúvida?
               </span>
               <span className="text-muted-foreground block text-sm">
-                É só me chamar no WhatsApp.
+                Me chama no WhatsApp.
               </span>
             </span>
             <ArrowUpRight className="text-subtle group-hover:text-primary h-4 w-4 transition-all group-hover:rotate-45" />

@@ -11,11 +11,34 @@ const STATUS: Record<
   NonNullable<AgendaEvent["status"]>,
   { label: string; className: string }
 > = {
-  "on-sale": { label: "Ingressos", className: "text-primary" },
-  free: { label: "Entrada franca", className: "text-success" },
-  soon: { label: "Em breve", className: "text-muted-foreground" },
-  "sold-out": { label: "Esgotado", className: "text-subtle line-through" },
+  "on-sale": {
+    label: "Ingressos",
+    className: "border-primary/40 bg-primary/10 text-primary",
+  },
+  free: {
+    label: "Entrada franca",
+    className: "border-success/40 bg-success/10 text-success",
+  },
+  soon: {
+    label: "Em breve",
+    className: "border-line-strong text-foreground/70",
+  },
+  "sold-out": { label: "Esgotado", className: "border-line text-subtle" },
 };
+
+function StatusPill({ status }: { status: AgendaEvent["status"] }) {
+  const { label, className } = STATUS[status ?? "on-sale"];
+  return (
+    <span
+      className={cn(
+        "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 font-mono text-[0.6rem] tracking-[0.15em] whitespace-nowrap uppercase",
+        className,
+      )}
+    >
+      {label}
+    </span>
+  );
+}
 
 /** Barras de equalizador — indicam que a agenda está "ao vivo". */
 function Equalizer() {
@@ -34,13 +57,12 @@ function Equalizer() {
 
 function EventRow({ event }: { event: AgendaEvent }) {
   const date = eventDateParts(event.date);
-  const status = STATUS[event.status ?? "on-sale"];
   const canLink = event.ticketUrl && event.status !== "sold-out";
 
   const content = (
     <>
-      <div className="flex w-20 shrink-0 flex-col items-center sm:w-24">
-        <span className="text-4xl font-semibold tracking-tighter tabular-nums sm:text-5xl">
+      <div className="flex w-14 shrink-0 flex-col items-center self-start pt-1 sm:w-24 sm:self-center sm:pt-0">
+        <span className="text-3xl font-semibold tracking-tighter tabular-nums sm:text-5xl">
           {date.day}
         </span>
         <span className="text-primary font-mono text-xs tracking-[0.2em] uppercase">
@@ -48,38 +70,35 @@ function EventRow({ event }: { event: AgendaEvent }) {
         </span>
       </div>
 
-      <div className="border-line min-w-0 flex-1 border-l pl-5 sm:pl-8">
+      <div className="border-line min-w-0 flex-1 border-l pl-4 sm:pl-8">
         <p className="text-subtle font-mono text-[0.65rem] tracking-[0.15em] uppercase">
           {date.weekday} · {date.year}
-          <span className={cn("sm:hidden", status.className)}>
-            {" "}
-            · {status.label}
-          </span>
         </p>
         <h3 className="group-hover:text-primary mt-1.5 text-lg font-semibold tracking-tight transition-colors sm:truncate sm:text-xl">
           {event.title}
         </h3>
-        <p className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="h-3.5 w-3.5" />
-            {event.venue} — {event.city}
+        <p className="text-muted-foreground mt-2 flex flex-col gap-1 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4">
+          <span className="inline-flex gap-1.5">
+            <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+            {event.venue} · {event.city}
           </span>
-          <span className="inline-flex items-center gap-1.5">
-            <Clock className="h-3.5 w-3.5" />
+          <span className="inline-flex gap-1.5">
+            <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             {date.time}
           </span>
         </p>
+        <div className="mt-3 flex items-center gap-3 sm:hidden">
+          <StatusPill status={event.status} />
+          {canLink && (
+            <span className="text-primary inline-flex items-center gap-1 text-sm font-medium">
+              Ver detalhes <ArrowUpRight className="h-3.5 w-3.5" />
+            </span>
+          )}
+        </div>
       </div>
 
       <div className="hidden items-center gap-3 sm:flex">
-        <span
-          className={cn(
-            "font-mono text-[0.7rem] tracking-[0.15em] uppercase",
-            status.className,
-          )}
-        >
-          {status.label}
-        </span>
+        <StatusPill status={event.status} />
         {canLink && (
           <span className="border-line-strong group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300">
             <ArrowUpRight className="h-4 w-4" />
@@ -90,7 +109,7 @@ function EventRow({ event }: { event: AgendaEvent }) {
   );
 
   const className =
-    "group flex items-center gap-4 py-6 sm:gap-6 sm:py-7 transition-colors";
+    "group flex items-center gap-3 py-6 sm:gap-6 sm:py-7 transition-colors";
 
   return (
     <li className="border-line reveal border-b first:border-t">
@@ -122,16 +141,16 @@ export function Agenda({ events }: { events: AgendaEvent[] }) {
           eyebrow="Agenda"
           title={
             <>
-              Próximas <span className="accent">apresentações</span>
+              Próximos <span className="accent">shows</span>
             </>
           }
-          description="Shows, workshops e participações. Chega mais — vai ser bom te ver por lá."
+          description="Shows, workshops e participações que já estão marcados."
         >
           <div className="text-muted-foreground mt-2 flex items-center gap-3 text-sm">
             <Equalizer />
             {hasEvents
               ? `${events.length} ${events.length === 1 ? "data confirmada" : "datas confirmadas"}`
-              : "Novas datas em breve"}
+              : "Nenhuma data marcada"}
           </div>
         </SectionHeading>
 
@@ -145,16 +164,11 @@ export function Agenda({ events }: { events: AgendaEvent[] }) {
           ) : (
             <div className="panel reveal relative flex flex-col items-start gap-6 overflow-hidden p-8 sm:p-12">
               <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,oklch(0.8_0.145_74/0.18),transparent_70%)]" />
-              <span className="text-subtle font-mono text-xs tracking-[0.2em] uppercase">
-                Sem datas anunciadas
-              </span>
               <p className="max-w-md text-2xl font-semibold tracking-tight sm:text-3xl">
-                O próximo show está sendo{" "}
-                <span className="accent">afinado</span>.
+                Nenhum show marcado por enquanto.
               </p>
               <p className="text-muted-foreground max-w-md text-sm leading-relaxed">
-                Acompanhe no Instagram para saber em primeira mão, ou
-                inscreva-se na newsletter logo abaixo.
+                Quando tiver data nova, aviso no Instagram e na newsletter.
               </p>
               <ActionLink href={site.socials.instagram} variant="secondary">
                 <InstagramIcon />

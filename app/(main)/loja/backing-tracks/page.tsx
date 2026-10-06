@@ -24,7 +24,7 @@ export default function BackingTracksPage({
           Backing <span className="accent">Tracks</span>
         </>
       }
-      description="Faixas em alta qualidade para tocar junto, improvisar e treinar o seu som."
+      description="Faixas em alta qualidade para tocar junto e treinar o seu som."
       searchParams={searchParams}
     />
   );

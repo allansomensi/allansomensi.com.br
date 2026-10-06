@@ -82,48 +82,52 @@ export function ProductCard({ product }: { product: SanityProduct }) {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="group panel panel-interactive flex h-full w-full cursor-pointer flex-col overflow-hidden text-left"
+          className="group panel panel-interactive flex h-full w-full cursor-pointer items-stretch gap-4 overflow-hidden p-3 text-left sm:flex-col sm:gap-0 sm:p-0"
         >
-          <div className="bg-surface-2 relative aspect-16/10 w-full overflow-hidden">
+          <div className="bg-surface-2 relative aspect-square w-28 shrink-0 overflow-hidden rounded-xl sm:aspect-16/10 sm:w-full sm:rounded-none">
             {cover(800, 500) && (
               <Image
                 src={cover(800, 500)}
                 alt={product.imageAlt || product.title}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 640px) 112px, (max-width: 1024px) 50vw, 33vw"
                 className="ease-out-expo object-cover transition-transform duration-700 group-hover:scale-105"
               />
             )}
             <CategoryTag
               product={product}
-              className="absolute top-3 left-3 border border-white/15 bg-black/55 text-white/85 backdrop-blur-md"
+              className="absolute top-3 left-3 hidden border border-white/15 bg-black/55 text-white/85 backdrop-blur-md sm:inline-flex"
             />
           </div>
 
-          <div className="flex flex-1 flex-col p-5 sm:p-6">
-            <h3 className="group-hover:text-primary text-lg leading-snug font-semibold tracking-tight transition-colors">
+          <div className="flex min-w-0 flex-1 flex-col py-1 pr-1 sm:p-6">
+            <CategoryTag
+              product={product}
+              className="text-primary -mt-1 -ml-2.5 w-fit sm:hidden"
+            />
+            <h3 className="group-hover:text-primary line-clamp-2 text-[0.95rem] leading-snug font-semibold tracking-tight transition-colors sm:text-lg">
               {product.title}
             </h3>
-            <p className="text-muted-foreground mt-2 line-clamp-2 text-sm leading-relaxed">
+            <p className="text-muted-foreground mt-2 line-clamp-2 hidden text-sm leading-relaxed sm:block">
               {product.description}
             </p>
 
-            <div className="mt-4">
+            <div className="mt-4 hidden sm:block">
               <Badges badges={product.badges} />
             </div>
 
-            <div className="border-line mt-auto flex items-end justify-between border-t pt-5">
+            <div className="sm:border-line mt-auto flex items-end justify-between pt-2 sm:border-t sm:pt-5">
               <div>
                 <p className="text-subtle font-mono text-[0.6rem] tracking-[0.15em] uppercase">
                   {options.length > 1 ? "A partir de" : "Preço"}
                 </p>
-                <p className="mt-1 text-xl font-semibold tracking-tight tabular-nums">
+                <p className="mt-0.5 text-base font-semibold tracking-tight tabular-nums sm:mt-1 sm:text-xl">
                   {startingPrice !== null
                     ? formatPrice(startingPrice)
                     : "Em breve"}
                 </p>
               </div>
-              <span className="border-line-strong group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300">
+              <span className="border-line-strong group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 sm:h-10 sm:w-10">
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
               </span>
             </div>
@@ -131,7 +135,11 @@ export function ProductCard({ product }: { product: SanityProduct }) {
         </button>
       </DialogTrigger>
 
-      <DialogContent className="border-line bg-surface-3 max-h-[92svh] gap-0 overflow-y-auto rounded-3xl p-0 sm:max-w-4xl">
+      <DialogContent className="border-line bg-surface-3 max-sm:data-[state=closed]:slide-out-to-bottom max-sm:data-[state=open]:slide-in-from-bottom max-h-[92svh] gap-0 overflow-y-auto rounded-3xl p-0 max-sm:top-auto max-sm:bottom-0 max-sm:left-0 max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-b-none max-sm:border-x-0 max-sm:border-b-0 sm:max-w-4xl">
+        <div
+          className="bg-line-strong mx-auto mt-3 h-1 w-10 rounded-full sm:hidden"
+          aria-hidden="true"
+        />
         <div className="grid lg:grid-cols-2">
           {/* Coluna da mídia + descrição */}
           <div className="border-line flex flex-col gap-6 border-t p-6 sm:p-8 lg:border-t-0 lg:border-r">
@@ -215,16 +223,16 @@ export function ProductCard({ product }: { product: SanityProduct }) {
 
             <ul className="text-muted-foreground mt-auto flex flex-col gap-2.5 pt-8 text-xs">
               <li className="flex items-center gap-2.5">
-                <Mail className="text-primary h-3.5 w-3.5" />
-                Link de download enviado por e-mail logo após o pagamento
+                <Mail className="text-primary h-3.5 w-3.5" />O link para
+                download chega por e-mail após o pagamento
               </li>
               <li className="flex items-center gap-2.5">
                 <CreditCard className="text-primary h-3.5 w-3.5" />
                 Pix ou cartão de crédito
               </li>
               <li className="flex items-center gap-2.5">
-                <ShieldCheck className="text-primary h-3.5 w-3.5" />
-                Checkout seguro em plataforma parceira
+                <ShieldCheck className="text-primary h-3.5 w-3.5" />O pagamento
+                é feito na plataforma de vendas
               </li>
             </ul>
           </div>

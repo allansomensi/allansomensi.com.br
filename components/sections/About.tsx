@@ -1,31 +1,21 @@
 import Image from "next/image";
-import { Quote } from "lucide-react";
 import { Logo } from "@/components/icons/logo";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { urlFor } from "@/sanity/lib/image";
 import { site } from "@/lib/site";
 import { AboutProps } from "@/types";
 
-const INFLUENCES = [
-  {
-    instrument: "Na guitarra",
-    names: ["Edu Ardanuy", "Kiko Loureiro", "Andy Timmons", "Greg Howe"],
-  },
-  {
-    instrument: "No violão",
-    names: ["Raphael Rabello", "Tom Jobim", "João Bosco", "Yamandu Costa"],
-  },
-];
+function Name({ children }: { children: React.ReactNode }) {
+  return <em className="text-foreground/90">{children}</em>;
+}
 
-const TEACHERS = [
-  { name: "Mozart Mello", detail: "Guitarra" },
-  { name: "Kiko Loureiro", detail: "Guitarra" },
-  { name: "Giovani Pinceta", detail: "Violão de 7 cordas" },
-];
+function Strong({ children }: { children: React.ReactNode }) {
+  return <strong className="text-foreground font-medium">{children}</strong>;
+}
 
 export function About({ image }: AboutProps) {
   const imageUrl = image?.image
-    ? urlFor(image.image).width(900).height(1200).quality(85).url()
+    ? urlFor(image.image).width(900).height(1125).quality(85).url()
     : null;
 
   return (
@@ -33,9 +23,20 @@ export function About({ image }: AboutProps) {
       id="sobre"
       className="section-y bg-surface-0 border-line relative w-full overflow-hidden border-y"
     >
-      <div className="shell grid grid-cols-1 items-start gap-14 lg:grid-cols-12 lg:gap-20">
-        {/* Retrato */}
-        <div className="reveal relative mx-auto w-full max-w-md lg:sticky lg:top-28 lg:col-span-5 lg:max-w-none">
+      {/* No mobile: título → foto → texto. No desktop: foto à esquerda. */}
+      <div className="shell grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-x-20 lg:gap-y-8">
+        <SectionHeading
+          className="reveal lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:self-end"
+          index="04"
+          eyebrow="Quem sou eu"
+          title={
+            <>
+              Sobre <span className="accent">mim</span>
+            </>
+          }
+        />
+
+        <div className="reveal relative mx-auto w-full max-w-sm lg:col-span-5 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:max-w-none lg:self-center">
           <div className="border-primary/30 absolute -inset-3 hidden translate-x-3 translate-y-3 rounded-3xl border lg:block" />
           <div className="border-line bg-surface-1 relative aspect-4/5 overflow-hidden rounded-3xl border">
             {imageUrl ? (
@@ -43,7 +44,7 @@ export function About({ image }: AboutProps) {
                 src={imageUrl}
                 alt={image?.imageAlt || image?.title || site.name}
                 fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
+                sizes="(max-width: 1024px) 384px, 40vw"
                 className="object-cover"
               />
             ) : (
@@ -52,7 +53,7 @@ export function About({ image }: AboutProps) {
               </div>
             )}
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/80 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 sm:p-6">
               <div>
                 <p className="font-semibold tracking-tight">{site.name}</p>
                 <p className="text-foreground/60 font-mono text-[0.65rem] tracking-[0.15em] uppercase">
@@ -64,78 +65,25 @@ export function About({ image }: AboutProps) {
           </div>
         </div>
 
-        {/* Texto */}
-        <div className="lg:col-span-7">
-          <SectionHeading
-            className="reveal"
-            index="04"
-            eyebrow="Sobre mim"
-            title={
-              <>
-                Entre o rock e a{" "}
-                <span className="accent">música brasileira</span>.
-              </>
-            }
-          />
-
-          <div className="reveal text-muted-foreground mt-8 space-y-5 text-base leading-relaxed sm:text-lg">
-            <p>
-              Há mais de sete anos estudo música, com foco em{" "}
-              <strong className="text-foreground font-medium">
-                guitarra e violão
-              </strong>
-              . Na guitarra, fui muito influenciado pelos grandes nomes do rock
-              e do fusion; no violão, minha paixão é a música brasileira.
-            </p>
-            <p>
-              Minha formação reflete essa dualidade: aprendi com músicos
-              renomados e estudei{" "}
-              <strong className="text-foreground font-medium">
-                violão de 7 cordas
-              </strong>{" "}
-              com uma das referências do Rio Grande do Sul.
-            </p>
-          </div>
-
-          <figure className="reveal border-primary my-12 border-l-2 pl-6 sm:pl-8">
-            <Quote className="text-primary/60 mb-3 h-5 w-5" />
-            <blockquote className="font-serif text-2xl leading-snug italic sm:text-3xl">
-              O som que busco é a mistura do rock com a música brasileira — um
-              aprendizado infinito, que sigo com estudo e dedicação.
-            </blockquote>
-          </figure>
-
-          <div className="reveal grid gap-8 sm:grid-cols-3">
-            {INFLUENCES.map((group) => (
-              <div key={group.instrument}>
-                <h3 className="text-subtle font-mono text-[0.7rem] tracking-[0.15em] uppercase">
-                  {group.instrument}
-                </h3>
-                <ul className="mt-4 space-y-2">
-                  {group.names.map((name) => (
-                    <li key={name} className="text-foreground/85 text-sm">
-                      {name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-            <div>
-              <h3 className="text-subtle font-mono text-[0.7rem] tracking-[0.15em] uppercase">
-                Formação
-              </h3>
-              <ul className="mt-4 space-y-2">
-                {TEACHERS.map((teacher) => (
-                  <li key={teacher.name} className="text-sm">
-                    <span className="text-foreground/85">{teacher.name}</span>
-                    <span className="text-subtle block text-xs">
-                      {teacher.detail}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+        <div className="reveal text-muted-foreground space-y-5 text-base leading-relaxed sm:text-lg lg:col-span-7 lg:col-start-6 lg:row-start-2">
+          <p>
+            Há mais de sete anos estudo música, focado no estudo de{" "}
+            <Strong>guitarra e violão</Strong>. Na guitarra, fui muito
+            influenciado por mestres como <Name>Edu Ardanuy</Name>,{" "}
+            <Name>Kiko Loureiro</Name>, <Name>Andy Timmons</Name> e{" "}
+            <Name>Greg Howe</Name>. No violão, minha paixão é a música
+            brasileira, especialmente a obra de gigantes como{" "}
+            <Name>Raphael Rabello</Name>, <Name>Tom Jobim</Name>,{" "}
+            <Name>João Bosco</Name> e <Name>Yamandu Costa</Name>.
+          </p>
+          <p>
+            Minha formação reflete essa dualidade. Aprendi com músicos renomados
+            como <Name>Mozart Mello</Name> e <Name>Kiko Loureiro</Name>, além de
+            estudar <Strong>violão de 7 cordas</Strong> com{" "}
+            <Name>Giovani Pinceta</Name>, referência no Rio Grande do Sul. O som
+            que busco é a mistura do Rock com música brasileira — um aprendizado
+            infinito que sigo com estudo e dedicação.
+          </p>
         </div>
       </div>
     </section>

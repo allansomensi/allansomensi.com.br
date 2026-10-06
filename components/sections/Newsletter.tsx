@@ -48,7 +48,7 @@ export function Newsletter() {
 
       await res.json();
 
-      setMessage("Pronto! Você está inscrito. Confira seu e-mail.");
+      setMessage("Inscrição feita! Confira seu e-mail.");
       setStatus("success");
       setEmail("");
     } catch (error: unknown) {
@@ -82,9 +82,12 @@ export function Newsletter() {
             <div>
               <p className="eyebrow">Newsletter</p>
               <h2 className="display mt-5 text-4xl sm:text-5xl">
-                Dicas, lançamentos e novidades{" "}
-                <span className="accent">direto no seu e-mail</span>.
+                Novidades por <span className="accent">e-mail</span>
               </h2>
+              <p className="text-muted-foreground mt-4 max-w-md">
+                Aviso quando sai material novo na loja ou quando tem show
+                marcado.
+              </p>
             </div>
 
             <div className="lg:pl-8">
@@ -148,7 +151,7 @@ export function Newsletter() {
                   !message && "text-subtle",
                 )}
               >
-                {message || "Sem spam. Cancele quando quiser."}
+                {message || "Dá para cancelar quando quiser."}
               </p>
             </div>
           </div>

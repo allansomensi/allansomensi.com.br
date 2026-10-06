@@ -1,12 +1,4 @@
-import {
-  ArrowRight,
-  CalendarCheck,
-  Check,
-  MapPin,
-  Sparkles,
-  TrendingUp,
-  Video,
-} from "lucide-react";
+import { ArrowRight, Check, MapPin, Video } from "lucide-react";
 import { ActionLink } from "@/components/ui/action-link";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { site } from "@/lib/site";
@@ -17,8 +9,7 @@ const LESSONS = [
     icon: MapPin,
     label: "Presencial",
     title: "Aulas presenciais",
-    description:
-      "Na minha casa ou a domicílio, em Bento Gonçalves (RS) e região.",
+    description: "Na minha casa ou na sua, em Bento Gonçalves (RS) e região.",
     features: [
       "Feedback imediato e correções técnicas precisas",
       "Material de apoio exclusivo (tabs e PDFs)",
@@ -32,37 +23,15 @@ const LESSONS = [
     icon: Video,
     label: "Online",
     title: "Aulas online",
-    description:
-      "Estude do conforto da sua casa ou de qualquer lugar do mundo, via Google Meet.",
+    description: "Pelo Google Meet, de onde você estiver.",
     features: [
-      "Aprenda de qualquer lugar, no seu ritmo",
+      "Horários flexíveis, sem deslocamento",
       "Material de apoio exclusivo (tabs e PDFs)",
       "Metodologia adaptada às suas metas",
     ],
     cta: "Agendar via WhatsApp",
     href: site.whatsapp.href,
     highlight: true,
-  },
-];
-
-const STEPS = [
-  {
-    icon: CalendarCheck,
-    title: "Agende",
-    description:
-      "Escolha o melhor horário pelo Calendly ou me chame no WhatsApp.",
-  },
-  {
-    icon: Sparkles,
-    title: "Primeira aula",
-    description:
-      "Entendemos juntos o seu nível, seus objetivos e o som que você busca.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Evolua",
-    description:
-      "Um plano de estudo sob medida, com material de apoio a cada etapa.",
   },
 ];
 
@@ -77,11 +46,10 @@ export function Lessons() {
             eyebrow="Aulas"
             title={
               <>
-                Guitarra e violão, <span className="accent">sob medida</span>{" "}
-                para você.
+                Presenciais ou <span className="accent">online</span>
               </>
             }
-            description="Para quem está começando e para quem já toca e quer continuar evoluindo. Cada aula parte dos seus objetivos e do seu momento."
+            description="Para quem está começando e para quem já toca. O conteúdo de cada aula depende do que você quer aprender."
           />
 
           <div className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
@@ -150,32 +118,6 @@ export function Lessons() {
             })}
           </div>
         </div>
-
-        {/* Como funciona */}
-        <ol className="border-line mt-20 grid gap-px overflow-hidden rounded-2xl border bg-(--line) md:grid-cols-3">
-          {STEPS.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <li
-                key={step.title}
-                className="reveal bg-background flex gap-5 p-7 sm:p-8"
-              >
-                <span className="text-primary font-mono text-xs">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="flex items-center gap-2.5 font-semibold">
-                    <Icon className="text-foreground/50 h-4 w-4" />
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
       </div>
     </section>
   );

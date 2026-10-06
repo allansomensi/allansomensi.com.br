@@ -110,7 +110,7 @@ export function TheFooter() {
       </div>
 
       {/* Assinatura gigante */}
-      <div className="shell select-none" aria-hidden="true">
+      <div className="shell hidden select-none sm:block" aria-hidden="true">
         <p className="display from-foreground/[0.09] bg-linear-to-b to-transparent bg-clip-text text-center text-[min(13vw,11.5rem)] leading-[0.8] font-semibold whitespace-nowrap text-transparent">
           Allan Somensi
         </p>
@@ -122,9 +122,7 @@ export function TheFooter() {
             © {new Date().getFullYear()} {site.name}. Todos os direitos
             reservados.
           </p>
-          <p className="font-mono">
-            Feito em Bento Gonçalves · v{packageJson.version}
-          </p>
+          <p className="font-mono">v{packageJson.version}</p>
         </div>
       </div>
     </footer>

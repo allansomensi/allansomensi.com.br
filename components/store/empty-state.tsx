@@ -2,8 +2,8 @@ import { PackageOpen } from "lucide-react";
 import { ActionLink } from "@/components/ui/action-link";
 
 export function EmptyState({
-  title = "Nenhum produto por aqui ainda",
-  description = "Novos materiais estão a caminho. Inscreva-se na newsletter para ser avisado dos lançamentos.",
+  title = "Ainda não tem produtos aqui",
+  description = "Assine a newsletter para saber quando sair algo novo.",
 }: {
   title?: string;
   description?: string;
@@ -20,7 +20,7 @@ export function EmptyState({
         </p>
       </div>
       <ActionLink href="/#newsletter" variant="secondary" size="sm">
-        Quero ser avisado
+        Assinar a newsletter
       </ActionLink>
     </div>
   );

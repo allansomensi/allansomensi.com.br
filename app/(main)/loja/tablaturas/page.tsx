@@ -24,7 +24,7 @@ export default function TablaturasPage({
           <span className="accent">Tablaturas</span>
         </>
       }
-      description="Transcrições, arranjos e exercícios para acelerar o seu estudo — em PDF e Guitar Pro."
+      description="Transcrições, arranjos e exercícios em PDF e Guitar Pro."
       searchParams={searchParams}
     />
   );

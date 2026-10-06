@@ -25,10 +25,10 @@ export default function NotFound() {
           404
         </p>
         <h1 className="display -mt-[0.5em] text-4xl sm:text-5xl">
-          Essa nota <span className="accent">não está</span> na escala.
+          Página <span className="accent">não encontrada</span>
         </h1>
         <p className="text-muted-foreground mx-auto mt-5 max-w-sm">
-          A página que você procura não existe ou foi movida.
+          A página que você está procurando não existe ou foi movida.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <ActionLink href="/">
@@ -36,7 +36,7 @@ export default function NotFound() {
             Voltar ao início
           </ActionLink>
           <ActionLink href="/loja" variant="secondary">
-            Ir para a loja
+            Ver a loja
           </ActionLink>
         </div>
       </div>

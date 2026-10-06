@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, CreditCard, Mail, Sparkles } from "lucide-react";
+import { ChevronRight, CreditCard, Mail } from "lucide-react";
 import { storeCategories } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -17,9 +17,8 @@ const TABS = [
 ];
 
 const PERKS = [
-  { icon: Mail, label: "Entrega imediata por e-mail" },
+  { icon: Mail, label: "Download enviado por e-mail" },
   { icon: CreditCard, label: "Pix ou cartão de crédito" },
-  { icon: Sparkles, label: "Arquivos em alta qualidade" },
 ];
 
 export function StorePageHeader({
@@ -29,7 +28,7 @@ export function StorePageHeader({
   crumb,
 }: StorePageHeaderProps) {
   return (
-    <header className="border-line relative overflow-hidden border-b pt-36 lg:pt-44">
+    <header className="border-line relative overflow-hidden border-b pt-32 sm:pt-36 lg:pt-44">
       <div className="glow-top pointer-events-none absolute inset-0" />
 
       <div className="shell relative">
@@ -66,7 +65,7 @@ export function StorePageHeader({
           </ol>
         </nav>
 
-        <h1 className="display mt-8 max-w-4xl text-5xl sm:text-6xl lg:text-7xl">
+        <h1 className="display mt-6 max-w-4xl text-[2.6rem] sm:mt-8 sm:text-6xl lg:text-7xl">
           {title}
         </h1>
         <p className="text-muted-foreground mt-6 max-w-xl text-base leading-relaxed sm:text-lg">

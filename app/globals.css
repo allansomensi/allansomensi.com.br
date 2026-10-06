@@ -150,7 +150,11 @@
 }
 
 @utility section-y {
-  padding-block: 5.5rem;
+  padding-block: 4.5rem;
+
+  @media (width >= 40rem) {
+    padding-block: 6rem;
+  }
 
   @media (width >= 64rem) {
     padding-block: 8rem;

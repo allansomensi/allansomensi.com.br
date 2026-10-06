@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
       <p>
         Esta política explica quais dados pessoais são coletados neste site,
         como são usados e quais são os seus direitos, em conformidade com a Lei
-        Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
+        Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018).
       </p>
 
       <h2>Dados coletados</h2>
