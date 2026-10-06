@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SanityLive } from "@/sanity/lib/live";
+import { site } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,10 +17,18 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://allansomensi.com.br";
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const siteUrl = site.url;
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#131110",
   width: "device-width",
   initialScale: 1,
 };
@@ -27,10 +36,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     template: "%s | Allan Somensi",
-    default: "Allan Somensi - Guitarrista",
+    default: "Allan Somensi — Guitarrista e professor de guitarra e violão",
   },
   description:
-    "Site oficial de Allan Somensi. Aulas de guitarra e violão, materiais de estudo e informações sobre minha trajetória como músico.",
+    "Site oficial de Allan Somensi. Aulas de guitarra e violão presenciais em Bento Gonçalves (RS) e online, tablaturas, backing tracks, presets e agenda de shows.",
   keywords: [
     "Allan Somensi",
     "Professor de Guitarra",
@@ -40,6 +49,9 @@ export const metadata: Metadata = {
     "Músico",
     "Guitarrista",
     "Bento Gonçalves",
+    "Tablaturas",
+    "Backing Tracks",
+    "Presets",
   ],
   robots: {
     index: true,
@@ -49,16 +61,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Allan Somensi - Guitarrista",
+    title: "Allan Somensi — Guitarrista",
     description:
-      "Aulas de guitarra e violão. Confira meus materiais de estudo, agenda e trajetória musical.",
+      "Aulas de guitarra e violão, produtos digitais para guitarristas e agenda de shows.",
     url: siteUrl,
     siteName: "Allan Somensi",
     locale: "pt_BR",
     type: "website",
   },
   twitter: {
-    title: "Allan Somensi - Guitarrista",
+    card: "summary_large_image",
+    title: "Allan Somensi — Guitarrista",
     description: "Aulas de guitarra e violão, materiais de estudo e contato.",
   },
 };
@@ -68,6 +81,8 @@ const jsonLd = {
   "@type": "Person",
   name: "Allan Somensi",
   url: siteUrl,
+  email: `mailto:${site.email}`,
+  sameAs: Object.values(site.socials),
   jobTitle: ["Guitarrista", "Professor de Música", "Músico"],
   knowsAbout: ["Guitarra", "Violão", "Música", "Teoria Musical"],
   address: {
@@ -85,7 +100,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="pt-br"
+      lang="pt-BR"
       className="dark scroll-smooth"
       data-scroll-behavior="smooth"
     >
@@ -97,7 +112,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
       >
         {children}
         <SanityLive />

@@ -1,168 +1,129 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import packageJson from "@/package.json";
+import { Logo } from "@/components/icons/logo";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  SpotifyIcon,
+  YoutubeIcon,
+} from "@/components/icons/social";
+import { ActionLink } from "@/components/ui/action-link";
+import { site, storeCategories } from "@/lib/site";
 
-function FooterLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="text-sm text-white/40 transition-colors hover:text-[oklch(0.72_0.17_72)]"
-    >
-      {children}
-    </Link>
-  );
-}
+const SOCIALS = [
+  { href: site.socials.instagram, label: "Instagram", icon: InstagramIcon },
+  { href: site.socials.youtube, label: "YouTube", icon: YoutubeIcon },
+  { href: site.socials.spotify, label: "Spotify", icon: SpotifyIcon },
+  { href: site.socials.facebook, label: "Facebook", icon: FacebookIcon },
+];
 
-function SocialIcon({
-  href,
-  children,
-  label,
-}: {
-  href: string;
-  children: React.ReactNode;
-  label: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/8 bg-white/5 text-white/40 transition-all hover:border-[oklch(0.72_0.17_72/0.3)] hover:bg-[oklch(0.72_0.17_72/0.1)] hover:text-[oklch(0.72_0.17_72)]"
-    >
-      {children}
-    </a>
-  );
-}
+const COLUMNS = [
+  {
+    title: "Loja",
+    links: storeCategories.map((c) => ({ href: c.href, label: c.label })),
+  },
+  {
+    title: "Navegação",
+    links: [
+      { href: "/#aulas", label: "Aulas" },
+      { href: "/#agenda", label: "Agenda" },
+      { href: "/#sobre", label: "Sobre" },
+      { href: "/#contato", label: "Contato" },
+    ],
+  },
+  {
+    title: "Suporte",
+    links: [
+      { href: "/#faq", label: "Perguntas frequentes" },
+      { href: "/politica-de-privacidade", label: "Política de privacidade" },
+      { href: "/termos-de-uso", label: "Termos de uso" },
+    ],
+  },
+];
 
 export function TheFooter() {
   return (
-    <footer className="border-t border-white/6 bg-[oklch(0.07_0.015_265)]">
-      {/* Top line */}
-      <div className="h-px bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72/0.4)] to-transparent" />
+    <footer className="bg-surface-0 border-line relative overflow-hidden border-t">
+      <div className="hairline absolute inset-x-0 top-0" />
 
-      <div className="container mx-auto grid grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-2 md:grid-cols-4 md:px-6">
-        {/* Brand */}
-        <div className="flex flex-col items-center gap-5 text-center sm:col-span-2 sm:items-start sm:text-left md:col-span-1">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/logo.svg"
-              width={32}
-              height={32}
-              alt="Allan Somensi Logo"
-              className="h-auto opacity-80 invert"
-            />
-            <span className="text-sm font-bold tracking-widest text-white/50 uppercase">
-              Allan Somensi
-            </span>
-          </div>
-          <p className="text-sm leading-relaxed text-white/35">
-            Professor de guitarra e violão em Bento Gonçalves, RS. Aulas
-            presenciais e online.
-          </p>
-          <a
-            href="https://calendly.com/allansomensi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex w-fit items-center rounded-md bg-[oklch(0.72_0.17_72/0.12)] px-3.5 py-2 text-sm font-semibold text-[oklch(0.72_0.17_72)] transition-colors hover:bg-[oklch(0.72_0.17_72/0.2)]"
+      <div className="shell grid grid-cols-1 gap-12 pt-16 pb-12 md:grid-cols-12 lg:pt-20">
+        {/* Marca */}
+        <div className="flex flex-col items-start gap-6 md:col-span-5">
+          <Link
+            href="/"
+            className="flex items-center gap-3"
+            aria-label="Início"
           >
-            Agende sua aula →
-          </a>
-          {/* Social icons */}
-          <div className="flex items-center justify-center gap-2 sm:justify-start">
-            <SocialIcon
-              href="https://instagram.com/allansomensi"
-              label="Instagram"
-            >
-              <Image
-                src="/icons/instagram.svg"
-                width={16}
-                height={16}
-                alt=""
-                className="opacity-60 invert"
-              />
-            </SocialIcon>
-            <SocialIcon
-              href="https://facebook.com/allansomensi"
-              label="Facebook"
-            >
-              <Image
-                src="/icons/facebook.svg"
-                width={16}
-                height={16}
-                alt=""
-                className="opacity-60 invert"
-              />
-            </SocialIcon>
-            <SocialIcon href="https://spotify.com/allansomensi" label="Spotify">
-              <Image
-                src="/icons/spotify.svg"
-                width={16}
-                height={16}
-                alt=""
-                className="opacity-60 invert"
-              />
-            </SocialIcon>
-            <SocialIcon href="https://youtube.com/allansomensi" label="YouTube">
-              <Image
-                src="/icons/youtube.svg"
-                width={16}
-                height={16}
-                alt=""
-                className="opacity-60 invert"
-              />
-            </SocialIcon>
-          </div>
+            <Logo className="text-primary h-8 w-auto" />
+            <span className="text-lg font-semibold tracking-tight">
+              {site.name}
+            </span>
+          </Link>
+          <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
+            Guitarrista e professor de guitarra e violão em {site.location}.
+            Aulas presenciais e online.
+          </p>
+          <ActionLink href={site.calendly.base} size="sm" variant="secondary">
+            Agende sua aula
+            <ArrowUpRight />
+          </ActionLink>
+          <ul className="flex items-center gap-2">
+            {SOCIALS.map(({ href, label, icon: Icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="border-line text-foreground/60 hover:border-primary/40 hover:text-primary hover:bg-primary/10 flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Shop */}
-        <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
-          <h4 className="mb-1 text-xs font-bold tracking-widest text-white/30 uppercase">
-            Loja
-          </h4>
-          <FooterLink href="/loja/backing-tracks">Backing Tracks</FooterLink>
-          <FooterLink href="/loja/tablaturas">Tablaturas</FooterLink>
-          <FooterLink href="/loja/presets">Presets</FooterLink>
-        </div>
-
-        {/* Nav */}
-        <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
-          <h4 className="mb-1 text-xs font-bold tracking-widest text-white/30 uppercase">
-            Navegação
-          </h4>
-          <FooterLink href="/#newsletter">Newsletter</FooterLink>
-          <FooterLink href="/#contato">Contato</FooterLink>
-          <FooterLink href="/#sobre">Sobre</FooterLink>
-        </div>
-
-        {/* Support */}
-        <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
-          <h4 className="mb-1 text-xs font-bold tracking-widest text-white/30 uppercase">
-            Suporte
-          </h4>
-          <FooterLink href="/politica-de-privacidade">
-            Política de Privacidade
-          </FooterLink>
-          <FooterLink href="/termos-de-uso">Termos de Uso</FooterLink>
-          <FooterLink href="/#faq">FAQ</FooterLink>
+        {/* Links */}
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-7">
+          {COLUMNS.map((column) => (
+            <nav key={column.title} aria-label={column.title}>
+              <h2 className="text-subtle font-mono text-[0.65rem] tracking-[0.2em] uppercase">
+                {column.title}
+              </h2>
+              <ul className="mt-5 flex flex-col gap-3">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-foreground/70 hover:text-primary text-sm transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/5 px-4 py-5 md:px-6">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-3 md:flex-row">
-          <p className="text-center text-xs text-white/20">
-            © {new Date().getFullYear()} Allan Somensi. Todos os direitos
+      {/* Assinatura gigante */}
+      <div className="shell select-none" aria-hidden="true">
+        <p className="display from-foreground/[0.09] bg-linear-to-b to-transparent bg-clip-text text-center text-[min(13vw,11.5rem)] leading-[0.8] font-semibold whitespace-nowrap text-transparent">
+          Allan Somensi
+        </p>
+      </div>
+
+      <div className="border-line border-t">
+        <div className="shell text-subtle flex flex-col items-center justify-between gap-2 py-6 text-xs sm:flex-row">
+          <p>
+            © {new Date().getFullYear()} {site.name}. Todos os direitos
             reservados.
           </p>
-          <p className="text-center font-mono text-xs text-white/20">
-            v{packageJson.version}
+          <p className="font-mono">
+            Feito em Bento Gonçalves · v{packageJson.version}
           </p>
         </div>
       </div>

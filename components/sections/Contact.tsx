@@ -1,96 +1,114 @@
-import { Mail, Smartphone } from "lucide-react";
 import Image from "next/image";
+import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { InstagramIcon } from "@/components/icons/social";
+import { site } from "@/lib/site";
 
-const WHATSAPP_NUMBER = "5554981187806";
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
-const WHATSAPP_NUMBER_DISPLAY = "(54) 98118-7806";
-const EMAIL_ADDRESS = "contato@allansomensi.com.br";
+const CHANNELS = [
+  {
+    icon: MessageCircle,
+    label: "WhatsApp",
+    value: site.whatsapp.display,
+    hint: "Resposta mais rápida",
+    href: site.whatsapp.href,
+  },
+  {
+    icon: Mail,
+    label: "E-mail",
+    value: site.email,
+    hint: "Parcerias e orçamentos",
+    href: `mailto:${site.email}`,
+  },
+  {
+    icon: InstagramIcon,
+    label: "Instagram",
+    value: "@allansomensi",
+    hint: "Bastidores e novidades",
+    href: site.socials.instagram,
+  },
+];
 
 export function Contact() {
   return (
-    <section id="contato" className="w-full py-16 lg:py-24">
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-2xl">
-          {/* Header */}
-          <div className="mb-12 text-center">
-            <p className="eyebrow mb-3">Fale comigo</p>
-            <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-              Contato
-            </h2>
-            <p className="text-muted-foreground mt-4 text-lg">
-              Tem alguma dúvida? Manda uma mensagem.
-            </p>
-          </div>
+    <section id="contato" className="section-y w-full pt-0 lg:pt-0">
+      <div className="shell">
+        <div className="panel reveal relative overflow-hidden p-6 sm:p-10 lg:p-14">
+          <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,oklch(0.8_0.145_74/0.14),transparent_65%)]" />
 
-          {/* Contact card */}
-          <div className="overflow-hidden rounded-2xl border border-white/8 bg-[oklch(0.12_0.016_265)]">
-            {/* Top bar */}
-            <div className="h-1 bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72)] to-transparent" />
+          <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <SectionHeading
+                index="06"
+                eyebrow="Contato"
+                title={
+                  <>
+                    Vamos <span className="accent">conversar</span>?
+                  </>
+                }
+                description="Dúvidas sobre aulas, produtos, shows ou parcerias — escolha o canal que preferir."
+              />
 
-            <div className="flex flex-col items-center gap-10 p-8 md:flex-row md:gap-12">
-              {/* QR Code */}
-              <div className="shrink-0">
-                <p className="mb-3 text-center text-xs font-bold tracking-widest text-white/30 uppercase">
-                  WhatsApp
-                </p>
-                <a
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-xl border border-white/10 bg-white p-3 transition-opacity hover:opacity-90"
-                >
+              <ul className="mt-10 grid grid-cols-1 gap-3">
+                {CHANNELS.map((channel) => {
+                  const Icon = channel.icon;
+                  const external = channel.href.startsWith("http");
+                  return (
+                    <li key={channel.label}>
+                      <a
+                        href={channel.href}
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noopener noreferrer" : undefined}
+                        className="group border-line hover:border-primary/40 flex items-center gap-4 rounded-2xl border bg-white/[0.02] p-4 transition-all duration-300 hover:bg-white/[0.04] sm:p-5"
+                      >
+                        <span className="border-line-strong group-hover:border-primary/40 group-hover:bg-primary/15 group-hover:text-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-colors">
+                          <Icon className="h-[18px] w-[18px]" />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="text-subtle block font-mono text-[0.65rem] tracking-[0.15em] uppercase">
+                            {channel.label}
+                            <span className="hidden sm:inline">
+                              {" "}
+                              · {channel.hint}
+                            </span>
+                          </span>
+                          <span className="group-hover:text-primary mt-0.5 block truncate font-medium transition-colors sm:text-lg">
+                            {channel.value}
+                          </span>
+                        </span>
+                        <ArrowUpRight className="text-subtle group-hover:text-primary h-4 w-4 shrink-0 transition-all duration-300 group-hover:rotate-45" />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* QR code — útil só em telas grandes, para abrir no celular */}
+            <div className="hidden lg:col-span-5 lg:flex lg:justify-end">
+              <a
+                href={site.whatsapp.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group border-line bg-surface-2 ease-out-expo flex flex-col items-center gap-5 rounded-3xl border p-6 transition-transform duration-500 hover:-rotate-1"
+              >
+                <span className="rounded-2xl bg-white p-4 shadow-2xl">
                   <Image
                     src="/wa-qrcode.svg"
-                    alt="QR Code WhatsApp"
-                    width={140}
-                    height={140}
-                    className="h-36 w-36"
+                    alt="QR code para abrir uma conversa no WhatsApp"
+                    width={176}
+                    height={176}
+                    className="h-44 w-44"
                   />
-                </a>
-              </div>
-
-              {/* Divider (hidden on mobile, vertical on md+) */}
-              <div className="hidden h-32 w-px bg-white/8 md:block" />
-              <div className="h-px w-full bg-white/8 md:hidden" />
-
-              {/* Contact info */}
-              <div className="flex flex-col gap-5">
-                <a
-                  href={`mailto:${EMAIL_ADDRESS}`}
-                  className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/4 p-4 transition-all hover:border-[oklch(0.72_0.17_72/0.3)] hover:bg-[oklch(0.72_0.17_72/0.06)]"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[oklch(0.72_0.17_72/0.12)]">
-                    <Mail className="h-5 w-5 text-[oklch(0.72_0.17_72)]" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold tracking-widest text-white/30 uppercase">
-                      E-mail
-                    </p>
-                    <p className="text-sm font-medium text-white/70 transition-colors group-hover:text-[oklch(0.72_0.17_72)]">
-                      {EMAIL_ADDRESS}
-                    </p>
-                  </div>
-                </a>
-
-                <a
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 rounded-xl border border-white/8 bg-white/4 p-4 transition-all hover:border-[oklch(0.72_0.17_72/0.3)] hover:bg-[oklch(0.72_0.17_72/0.06)]"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[oklch(0.72_0.17_72/0.12)]">
-                    <Smartphone className="h-5 w-5 text-[oklch(0.72_0.17_72)]" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold tracking-widest text-white/30 uppercase">
-                      WhatsApp
-                    </p>
-                    <p className="text-sm font-medium text-white/70 transition-colors group-hover:text-[oklch(0.72_0.17_72)]">
-                      {WHATSAPP_NUMBER_DISPLAY}
-                    </p>
-                  </div>
-                </a>
-              </div>
+                </span>
+                <span className="text-center">
+                  <span className="block text-sm font-medium">
+                    Aponte a câmera do celular
+                  </span>
+                  <span className="text-subtle block font-mono text-[0.65rem] tracking-[0.15em] uppercase">
+                    e fale comigo no WhatsApp
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
         </div>

@@ -1,56 +1,31 @@
-import { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { TablaturasList } from "@/components/store/tablaturas-list";
-import { StorePageHeader } from "@/components/store/store-page-header";
-import { SanityProduct } from "@/types";
+import type { Metadata } from "next";
+import { CategoryPage } from "@/components/store/category-page";
 import { tablaturasQuery } from "@/sanity/lib/queries";
-import { client } from "@/sanity/lib/client";
 
-const ITEMS_PER_PAGE = 9;
+export const metadata: Metadata = {
+  title: "Tablaturas",
+  description:
+    "Transcrições, arranjos e exercícios de guitarra e violão em PDF e Guitar Pro.",
+  alternates: { canonical: "/loja/tablaturas" },
+};
 
-function ProductGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <Skeleton className="h-72 w-full" />
-      <Skeleton className="h-72 w-full" />
-      <Skeleton className="h-72 w-full" />
-    </div>
-  );
-}
-
-export default async function TablaturasPage({
+export default function TablaturasPage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const resolvedSearchParams = await searchParams;
-
-  const currentPage = Number(resolvedSearchParams.page) || 1;
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const end = currentPage * ITEMS_PER_PAGE;
-
-  const { products, totalCount } = await client.fetch<{
-    products: SanityProduct[];
-    totalCount: number;
-  }>(tablaturasQuery, { start, end });
-
-  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
-
   return (
-    <div className="min-h-screen">
-      <StorePageHeader
-        title="Tablaturas"
-        description="Transcrições, arranjos e exercícios para acelerar seu estudo."
-      />
-      <div className="container mx-auto px-4 py-16 md:px-6 lg:px-8">
-        <Suspense fallback={<ProductGridSkeleton />}>
-          <TablaturasList
-            products={products}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
-        </Suspense>
-      </div>
-    </div>
+    <CategoryPage
+      query={tablaturasQuery}
+      basePath="/loja/tablaturas"
+      crumb="Tablaturas"
+      title={
+        <>
+          <span className="accent">Tablaturas</span>
+        </>
+      }
+      description="Transcrições, arranjos e exercícios para acelerar o seu estudo — em PDF e Guitar Pro."
+      searchParams={searchParams}
+    />
   );
 }

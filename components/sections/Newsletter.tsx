@@ -1,25 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRightIcon, AtSignIcon, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group";
+import { ArrowRight, Check, Loader2, Mail } from "lucide-react";
+import { actionVariants } from "@/components/ui/action-link";
+import { cn } from "@/lib/utils";
+
+type Status = "idle" | "loading" | "success" | "error";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const [status, setStatus] = useState<Status>("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) {
-      setMessage("Por favor, insira um e-mail.");
+    if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
+      setMessage("Por favor, insira um e-mail válido.");
       setStatus("error");
       return;
     }
@@ -31,7 +27,7 @@ export function Newsletter() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email.trim() }),
       });
 
       if (!res.ok) {
@@ -52,7 +48,7 @@ export function Newsletter() {
 
       await res.json();
 
-      setMessage("Sucesso! Você está inscrito.");
+      setMessage("Pronto! Você está inscrito. Confira seu e-mail.");
       setStatus("success");
       setEmail("");
     } catch (error: unknown) {
@@ -65,82 +61,98 @@ export function Newsletter() {
     }
   };
 
+  const busy = status === "loading" || status === "success";
+
   return (
-    <section
-      id="newsletter"
-      className="relative w-full overflow-hidden bg-[oklch(0.13_0.02_265)] py-16 lg:py-24"
-    >
-      {/* Decorative glow */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-20"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 100%, oklch(0.72 0.17 72) 0%, transparent 70%)",
-        }}
-      />
+    <section id="newsletter" className="w-full pb-24 lg:pb-32">
+      <div className="shell">
+        <div className="reveal border-primary/25 relative overflow-hidden rounded-3xl border bg-[linear-gradient(135deg,oklch(0.8_0.145_74/0.16),oklch(0.8_0.145_74/0.03)_45%,transparent)] px-6 py-14 sm:px-12 lg:px-16 lg:py-20">
+          {/* Cordas decorativas */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-5 flex flex-col gap-2 opacity-35">
+            {[0.5, 0.75, 1, 1.25, 1.5, 2].map((h, i) => (
+              <span
+                key={i}
+                className="from-primary/0 via-primary/50 to-primary/0 block bg-linear-to-r"
+                style={{ height: h }}
+              />
+            ))}
+          </div>
 
-      {/* Top/bottom borders */}
-      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72/0.3)] to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-[oklch(0.72_0.17_72/0.3)] to-transparent" />
+          <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <p className="eyebrow">Newsletter</p>
+              <h2 className="display mt-5 text-4xl sm:text-5xl">
+                Dicas, lançamentos e novidades{" "}
+                <span className="accent">direto no seu e-mail</span>.
+              </h2>
+            </div>
 
-      <div className="relative container mx-auto px-4 text-center">
-        <p className="eyebrow mb-4">Fique por dentro</p>
-        <h2 className="mb-3 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Inscreva-se na Newsletter
-        </h2>
-        <p className="text-muted-foreground mx-auto mb-10 max-w-md text-lg">
-          Novidades, dicas de guitarra e lançamentos exclusivos direto no seu
-          e-mail.
-        </p>
+            <div className="lg:pl-8">
+              <form onSubmit={handleSubmit} noValidate>
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Seu e-mail
+                </label>
+                <div className="border-line-strong bg-surface-0/80 focus-within:border-primary/60 focus-within:ring-primary/20 flex flex-col gap-2 rounded-3xl border p-2 backdrop-blur-md transition-all focus-within:ring-4 sm:flex-row sm:rounded-full">
+                  <div className="flex flex-1 items-center gap-3 px-4">
+                    <Mail className="text-subtle h-4 w-4 shrink-0" />
+                    <input
+                      id="newsletter-email"
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      placeholder="seu@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={busy}
+                      required
+                      aria-invalid={status === "error" || undefined}
+                      aria-describedby="newsletter-feedback"
+                      className="placeholder:text-subtle h-11 w-full bg-transparent text-base outline-none focus-visible:outline-none disabled:opacity-60"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={busy}
+                    className={cn(actionVariants({ size: "md" }), "sm:w-auto")}
+                  >
+                    {status === "loading" && (
+                      <>
+                        <Loader2 className="animate-spin" />
+                        Enviando…
+                      </>
+                    )}
+                    {status === "success" && (
+                      <>
+                        <Check />
+                        Inscrito
+                      </>
+                    )}
+                    {(status === "idle" || status === "error") && (
+                      <>
+                        Inscrever-se
+                        <ArrowRight className="transition-transform group-hover/action:translate-x-0.5" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
 
-        <form
-          onSubmit={handleSubmit}
-          className="mx-auto flex max-w-md flex-col items-center gap-3 sm:flex-row"
-        >
-          <InputGroup className="flex-1 border-white/10 bg-[oklch(0.1_0.016_265)]">
-            <InputGroupInput
-              placeholder="Seu melhor e-mail"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={status === "loading" || status === "success"}
-              required
-              className="text-white placeholder:text-white/25"
-            />
-            <InputGroupAddon>
-              <AtSignIcon className="text-white/25" />
-            </InputGroupAddon>
-          </InputGroup>
-
-          <Button
-            type="submit"
-            disabled={status === "loading" || status === "success"}
-            className="shrink-0 bg-[oklch(0.72_0.17_72)] font-semibold text-[oklch(0.08_0.02_60)] hover:bg-[oklch(0.78_0.17_72)]"
-          >
-            {status === "loading" && <Loader2 className="animate-spin" />}
-            {status === "success" && "Inscrito! ✓"}
-            {(status === "idle" || status === "error") && (
-              <>
-                Inscrever-se
-                <ArrowRightIcon className="ml-1 h-4 w-4" />
-              </>
-            )}
-          </Button>
-        </form>
-
-        {message && (
-          <p
-            className={`mt-4 text-sm font-medium ${
-              status === "error" ? "text-red-400" : "text-[oklch(0.72_0.17_72)]"
-            }`}
-          >
-            {message}
-          </p>
-        )}
-
-        <p className="text-muted-foreground mt-4 text-xs">
-          Sem spam. Cancele quando quiser.
-        </p>
+              <p
+                id="newsletter-feedback"
+                role="status"
+                aria-live="polite"
+                className={cn(
+                  "mt-4 min-h-5 px-4 text-sm",
+                  status === "error" && "text-destructive",
+                  status === "success" && "text-success",
+                  !message && "text-subtle",
+                )}
+              >
+                {message || "Sem spam. Cancele quando quiser."}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,45 +1,45 @@
-"use client";
-
-import { ProductCard } from "@/components/store/product-card";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { ProductGrid } from "@/components/store/product-grid";
 import { SanityProduct } from "@/types";
 
 interface ProductSectionProps {
+  index: string;
   title: string;
+  description: string;
   products: SanityProduct[];
   viewMoreLink: string;
 }
 
 export function ProductSection({
+  index,
   title,
+  description,
   products,
   viewMoreLink,
 }: ProductSectionProps) {
   if (!products || products.length === 0) return null;
 
   return (
-    <section className="mb-20">
-      {/* Section divider */}
-      <div className="mb-10 flex items-center justify-between">
+    <section className="border-line border-b py-16 last:border-b-0 lg:py-20">
+      <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <h2 className="text-3xl font-extrabold tracking-tight">{title}</h2>
-          <div className="mt-2 h-0.5 w-12 rounded-full bg-[oklch(0.72_0.17_72)]" />
+          <p className="text-primary font-mono text-xs">{index}</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            {title}
+          </h2>
+          <p className="text-muted-foreground mt-2 text-sm">{description}</p>
         </div>
         <Link
           href={viewMoreLink}
-          className="group flex items-center gap-1.5 text-sm font-semibold text-[oklch(0.72_0.17_72)] transition-all hover:gap-2.5"
+          className="group text-primary inline-flex items-center gap-1.5 text-sm font-medium"
         >
           Ver todos
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
+      <ProductGrid products={products} />
     </section>
   );
 }

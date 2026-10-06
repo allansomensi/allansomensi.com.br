@@ -1,46 +1,45 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Logo } from "@/components/icons/logo";
+import { ActionLink } from "@/components/ui/action-link";
 
 export default function NotFound() {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 text-center">
-      {/* Ambient glow */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-20"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, oklch(0.72 0.17 72) 0%, transparent 70%)",
-        }}
-      />
+    <main className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-5 text-center">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,oklch(0.8_0.145_74/0.14),transparent_70%)]" />
 
-      <div className="relative z-10">
-        {/* Big number */}
-        <p className="eyebrow mb-4">Erro</p>
-        <h1
-          className="text-[clamp(6rem,20vw,14rem)] leading-none font-extrabold tracking-tight text-white/5 select-none"
+      <Link
+        href="/"
+        aria-label="Início"
+        className="hover:text-primary absolute top-8 transition-colors"
+      >
+        <Logo className="h-8 w-auto" />
+      </Link>
+
+      <div className="relative">
+        <p className="eyebrow">Erro 404</p>
+        <p
+          className="display text-foreground/[0.06] mt-4 text-[clamp(7rem,28vw,16rem)] leading-none select-none"
           aria-hidden="true"
         >
           404
+        </p>
+        <h1 className="display -mt-[0.5em] text-4xl sm:text-5xl">
+          Essa nota <span className="accent">não está</span> na escala.
         </h1>
-
-        <div className="-mt-8">
-          <div className="mx-auto mb-6 h-1 w-16 rounded-full bg-[oklch(0.72_0.17_72)]" />
-          <h2 className="text-3xl font-extrabold tracking-tight lg:text-4xl">
-            Página não encontrada
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-sm text-lg">
-            A página que você está procurando não existe ou foi movida.
-          </p>
-
-          <Link
-            href="/"
-            className="group mt-10 inline-flex items-center gap-2 rounded-full bg-[oklch(0.72_0.17_72)] px-7 py-3.5 text-sm font-bold text-[oklch(0.08_0.02_60)] transition-all hover:scale-105 hover:bg-[oklch(0.78_0.17_72)]"
-          >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+        <p className="text-muted-foreground mx-auto mt-5 max-w-sm">
+          A página que você procura não existe ou foi movida.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <ActionLink href="/">
+            <ArrowLeft />
             Voltar ao início
-          </Link>
+          </ActionLink>
+          <ActionLink href="/loja" variant="secondary">
+            Ir para a loja
+          </ActionLink>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -39,7 +39,8 @@ export interface SanityProduct {
   imageUrl: string;
   imageAlt?: string;
   category: string;
-  badges: string[];
+  categorySlug?: string;
+  badges?: string[];
   purchaseOptions: SanityPurchaseOption[];
 }
 
@@ -67,4 +68,25 @@ export interface AboutProps {
     image: SanityImage;
     imageAlt?: string;
   } | null;
+}
+
+export interface StoreHighlight {
+  _id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  href: string;
+  tags?: string[];
+  order: number;
+}
+
+export interface AgendaEvent {
+  _id: string;
+  title: string;
+  date: string;
+  venue: string;
+  city: string;
+  ticketUrl?: string;
+  status?: "on-sale" | "free" | "sold-out" | "soon";
 }

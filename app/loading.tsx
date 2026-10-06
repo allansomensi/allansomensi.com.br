@@ -1,7 +1,19 @@
 export default function Loading() {
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-zinc-950">
-      <div className="h-10 w-10 animate-spin rounded-full border-2 border-(--gold) border-t-transparent"></div>
+    <div
+      className="bg-background flex h-svh w-full items-center justify-center"
+      role="status"
+      aria-label="Carregando"
+    >
+      <div className="flex h-8 items-end gap-1">
+        {[0, 0.15, 0.3, 0.45, 0.6].map((delay) => (
+          <span
+            key={delay}
+            className="bg-primary animate-eq h-full w-1 origin-bottom rounded-full"
+            style={{ animationDelay: `${delay}s` }}
+          />
+        ))}
+      </div>
     </div>
   );
 }

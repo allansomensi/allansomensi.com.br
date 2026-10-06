@@ -1,104 +1,116 @@
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Link from "next/link";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { site } from "@/lib/site";
+
+const QUESTIONS = [
+  {
+    id: "agendamento",
+    title: "Como funciona o agendamento das aulas?",
+    content:
+      "Basta clicar em “Agendar aula” e escolher o melhor horário pelo Calendly. Você recebe um e-mail de confirmação com todos os detalhes logo após o agendamento. Se preferir, também é possível agendar pelo WhatsApp.",
+  },
+  {
+    id: "cancelamento",
+    title: "Qual é a política de cancelamento ou remarcação?",
+    content:
+      "Peço que cancelamentos ou remarcações sejam feitos com, no mínimo, 24 horas de antecedência. Aulas canceladas com menos de 24h de aviso prévio são cobradas normalmente.",
+  },
+  {
+    id: "local",
+    title: "Onde as aulas presenciais acontecem?",
+    content:
+      "As aulas presenciais acontecem a domicílio, na casa do aluno, ou na minha casa, em Bento Gonçalves (RS). As aulas online são realizadas pelo Google Meet.",
+  },
+  {
+    id: "entrega",
+    title: "Como recebo os produtos digitais após a compra?",
+    content:
+      "Logo após a confirmação do pagamento, você recebe um e-mail automático com um link seguro para baixar os arquivos. Se não encontrar, verifique a caixa de spam.",
+  },
+  {
+    id: "pagamento",
+    title: "Quais formas de pagamento são aceitas?",
+    content:
+      "Para produtos digitais e aulas, aceito pagamentos via cartão de crédito e Pix.",
+  },
+  {
+    id: "formatos",
+    title: "Em quais formatos os arquivos da loja são entregues?",
+    content:
+      "As backing tracks são entregues em MP3 ou WAV de alta qualidade. As tablaturas estão disponíveis em PDF e, na maioria dos casos, também em Guitar Pro (.gpx ou .gp5). Confira a descrição de cada produto para mais detalhes.",
+  },
+];
 
 export function Faq() {
   return (
-    <section id="faq" className="w-full py-16 lg:py-24">
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-3xl">
-          {/* Header */}
-          <div className="mb-12 text-center">
-            <p className="eyebrow mb-3">Tire suas dúvidas</p>
-            <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-              Perguntas Frequentes
-            </h2>
-            <p className="text-muted-foreground mx-auto mt-4 max-w-xl text-lg">
-              Não encontrou o que procura?{" "}
-              <Link
-                href="/#contato"
-                className="text-[oklch(0.72_0.17_72)] hover:underline"
-              >
-                Entre em contato
-              </Link>
-              .
-            </p>
-          </div>
+    <section id="faq" className="section-y w-full">
+      <div className="shell grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="reveal flex flex-col gap-10 lg:sticky lg:top-32 lg:col-span-5 lg:self-start">
+          <SectionHeading
+            index="05"
+            eyebrow="FAQ"
+            title={
+              <>
+                Perguntas <span className="accent">frequentes</span>
+              </>
+            }
+            description="Tudo o que você precisa saber sobre aulas, pagamentos e produtos digitais."
+          />
 
-          {/* Accordion */}
-          <Accordion
-            className="w-full space-y-2"
-            collapsible
-            defaultValue="item-1"
-            type="single"
+          <a
+            href={site.whatsapp.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="panel panel-interactive group flex items-center gap-4 p-5"
           >
-            {questions.map((item) => (
-              <AccordionItem
-                key={item.id}
-                value={item.id}
-                className="stage-card rounded-xl border px-6 data-[state=open]:border-[oklch(0.72_0.17_72/0.25)] data-[state=open]:bg-(--surface-2)"
-              >
-                <AccordionTrigger className="py-5 text-left text-sm leading-snug font-semibold text-white/85 hover:text-[oklch(0.72_0.17_72)] hover:no-underline data-[state=open]:text-[oklch(0.72_0.17_72)]">
-                  {item.title}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">
-                  {item.content}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+            <span className="bg-primary/15 text-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
+              <MessageCircle className="h-5 w-5" />
+            </span>
+            <span className="flex-1">
+              <span className="block text-sm font-semibold">
+                Não encontrou sua dúvida?
+              </span>
+              <span className="text-muted-foreground block text-sm">
+                É só me chamar no WhatsApp.
+              </span>
+            </span>
+            <ArrowUpRight className="text-subtle group-hover:text-primary h-4 w-4 transition-all group-hover:rotate-45" />
+          </a>
         </div>
+
+        <Accordion
+          type="single"
+          collapsible
+          defaultValue={QUESTIONS[0].id}
+          className="reveal lg:col-span-7"
+        >
+          {QUESTIONS.map((item, i) => (
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className="border-line border-b first:border-t"
+            >
+              <AccordionTrigger className="group/trigger hover:text-primary data-[state=open]:text-primary items-center gap-6 rounded-none py-6 text-base font-medium hover:no-underline sm:text-lg [&>svg]:size-5">
+                <span className="flex items-baseline gap-5">
+                  <span className="text-subtle font-mono text-xs">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {item.title}
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground pb-7 pl-10 text-[0.95rem] leading-relaxed">
+                {item.content}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </section>
   );
 }
-
-const questions = [
-  {
-    id: "item-1",
-    title: "Como funciona o agendamento das aulas?",
-    content:
-      "Basta clicar no botão 'Agendar Aula' e o agendamento será realizado pelo site Calendly.com. Você receberá um e-mail de confirmação com todos os detalhes após o agendamento.",
-  },
-  {
-    id: "item-2",
-    title: "Qual é a política de cancelamento ou remarcação de aula?",
-    content:
-      "Peço que qualquer cancelamento ou necessidade de remarcação seja feito com, no mínimo, 24 horas de antecedência. Aulas canceladas com menos de 24h de aviso prévio serão cobradas normalmente.",
-  },
-  {
-    id: "item-3",
-    title: "Onde as aulas presenciais acontecem?",
-    content:
-      "As aulas presenciais são realizadas a domicílio na casa do aluno ou na minha casa, em Bento Gonçalves (RS). Aulas remotas são realizadas via Google Meet.",
-  },
-  {
-    id: "item-4",
-    title:
-      "Como recebo os produtos digitais (tabs, backing tracks) após a compra?",
-    content:
-      "Imediatamente após a confirmação do pagamento, você receberá um e-mail automático contendo um link seguro para fazer o download dos seus arquivos. Verifique sua caixa de spam caso não o encontre.",
-  },
-  {
-    id: "item-5",
-    title: "Quais formas de pagamento são aceitas?",
-    content:
-      "Para produtos digitais e agendamento de aulas, aceitamos pagamentos via Cartão de Crédito e Pix.",
-  },
-  {
-    id: "item-6",
-    title: "Em quais formatos os arquivos da loja são entregues?",
-    content:
-      "As Backing Tracks são entregues em formato MP3 ou WAV de alta qualidade. As Tablaturas estão disponíveis em formato PDF e, na maioria dos casos, também em formato Guitar Pro (.gpx ou .gp5). Verifique a descrição de cada produto para mais detalhes.",
-  },
-  {
-    id: "item-7",
-    title: "Não encontrei minha dúvida aqui. Como posso entrar em contato?",
-    content:
-      "Para qualquer outra dúvida, por favor, entre em contato comigo por email, WhatsApp ou pelas redes sociais. Responderei o mais breve possível!",
-  },
-];

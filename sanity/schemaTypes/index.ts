@@ -5,6 +5,7 @@ import purchaseOption from "./purchaseOption";
 import heroBanner from "./heroBanner";
 import aboutImage from "./aboutImage";
 import storeHighlight from "./storeHighlight";
+import event from "./event";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -14,5 +15,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     heroBanner,
     aboutImage,
     storeHighlight,
+    event,
   ],
 };

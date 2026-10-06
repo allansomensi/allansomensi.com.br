@@ -1,216 +1,234 @@
+import Image from "next/image";
 import {
-  FileText,
-  Music,
-  Download,
-  ShoppingCart,
   ArrowUpRight,
+  CreditCard,
+  FileMusic,
+  Mail,
+  Music,
+  ShieldCheck,
+  ShoppingBag,
+  SlidersHorizontal,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PortableText } from "next-sanity";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import Image from "next/image";
-import Link from "next/link";
-import { SanityProduct } from "@/types";
-import { PortableText } from "next-sanity";
+import { actionVariants } from "@/components/ui/action-link";
 import { urlFor } from "@/sanity/lib/image";
+import { formatPrice } from "@/lib/format";
+import { cn } from "@/lib/utils";
+import { SanityProduct } from "@/types";
 
-interface ProductCardProps {
+const CATEGORY_ICONS: Record<string, typeof Music> = {
+  tablatura: FileMusic,
+  "backing-track": Music,
+  preset: SlidersHorizontal,
+};
+
+function CategoryTag({
+  product,
+  className,
+}: {
   product: SanityProduct;
+  className?: string;
+}) {
+  const Icon = CATEGORY_ICONS[product.categorySlug ?? ""] ?? ShoppingBag;
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[0.65rem] tracking-[0.12em] uppercase",
+        className,
+      )}
+    >
+      <Icon className="h-3 w-3" />
+      {product.category}
+    </span>
+  );
 }
 
-export function ProductCard({ product }: ProductCardProps) {
-  const startingPrice = product.purchaseOptions.reduce((min, p) => {
-    return p.price < min ? p.price : min;
-  }, Infinity);
+function Badges({ badges }: { badges?: string[] }) {
+  if (!badges?.length) return null;
+  return (
+    <ul className="flex flex-wrap gap-1.5">
+      {badges.map((badge) => (
+        <li
+          key={badge}
+          className="border-line-strong text-foreground/65 rounded-md border px-2 py-0.5 font-mono text-[0.65rem]"
+        >
+          {badge}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case "tablatura":
-        return <FileText className="h-4 w-4" />;
-      case "backing-track":
-        return <Music className="h-4 w-4" />;
-      case "preset":
-        return <Download className="h-4 w-4" />;
-      default:
-        return null;
-    }
-  };
+export function ProductCard({ product }: { product: SanityProduct }) {
+  const options = product.purchaseOptions ?? [];
+  const startingPrice = options.length
+    ? Math.min(...options.map((o) => o.price))
+    : null;
 
-  const getCategoryLabel = (category: string) => {
-    switch (category) {
-      case "tablatura":
-        return "Tablatura";
-      case "backing-track":
-        return "Backing Track";
-      case "preset":
-        return "Preset";
-      default:
-        return category;
-    }
-  };
+  const cover = (width: number, height: number) =>
+    product.mainImage
+      ? urlFor(product.mainImage).width(width).height(height).quality(85).url()
+      : product.imageUrl;
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="stage-card group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl">
-          {/* Image */}
-          <div className="relative aspect-video w-full overflow-hidden">
-            <Image
-              src={
-                product.mainImage
-                  ? urlFor(product.mainImage).width(800).height(450).url()
-                  : product.imageUrl
-              }
-              alt={product.imageAlt || product.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        <button
+          type="button"
+          className="group panel panel-interactive flex h-full w-full cursor-pointer flex-col overflow-hidden text-left"
+        >
+          <div className="bg-surface-2 relative aspect-16/10 w-full overflow-hidden">
+            {cover(800, 500) && (
+              <Image
+                src={cover(800, 500)}
+                alt={product.imageAlt || product.title}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="ease-out-expo object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            )}
+            <CategoryTag
+              product={product}
+              className="absolute top-3 left-3 border border-white/15 bg-black/55 text-white/85 backdrop-blur-md"
             />
-            {/* Category pill overlay */}
-            <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/60 px-2.5 py-1 text-xs font-semibold text-white/80 backdrop-blur-sm">
-              {getCategoryIcon(product.category)}
-              <span>{getCategoryLabel(product.category)}</span>
-            </div>
           </div>
 
-          {/* Content */}
-          <div className="flex flex-1 flex-col p-5">
-            <h3 className="mb-1.5 text-base leading-snug font-bold">
+          <div className="flex flex-1 flex-col p-5 sm:p-6">
+            <h3 className="group-hover:text-primary text-lg leading-snug font-semibold tracking-tight transition-colors">
               {product.title}
             </h3>
-            <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+            <p className="text-muted-foreground mt-2 line-clamp-2 text-sm leading-relaxed">
               {product.description}
             </p>
 
-            {/* Badges */}
-            {product.badges?.length > 0 && (
-              <div className="mb-4 flex flex-wrap gap-1.5">
-                {product.badges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs font-medium text-white/50"
-                  >
-                    {badge}
-                  </span>
-                ))}
-              </div>
-            )}
+            <div className="mt-4">
+              <Badges badges={product.badges} />
+            </div>
 
-            {/* Price row */}
-            <div className="mt-auto flex items-center justify-between border-t border-white/8 pt-4">
+            <div className="border-line mt-auto flex items-end justify-between border-t pt-5">
               <div>
-                <p className="text-xs text-white/35">A partir de</p>
-                <p className="text-lg font-bold text-[oklch(0.72_0.17_72)]">
-                  {product.purchaseOptions.length > 0
-                    ? `R$ ${startingPrice.toFixed(2).replace(".", ",")}`
-                    : "Grátis"}
+                <p className="text-subtle font-mono text-[0.6rem] tracking-[0.15em] uppercase">
+                  {options.length > 1 ? "A partir de" : "Preço"}
+                </p>
+                <p className="mt-1 text-xl font-semibold tracking-tight tabular-nums">
+                  {startingPrice !== null
+                    ? formatPrice(startingPrice)
+                    : "Em breve"}
                 </p>
               </div>
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[oklch(0.72_0.17_72/0.12)] text-[oklch(0.72_0.17_72)] transition-colors group-hover:bg-[oklch(0.72_0.17_72)] group-hover:text-[oklch(0.08_0.02_60)]">
-                <ArrowUpRight className="h-4 w-4" />
+              <span className="border-line-strong group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300">
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
               </span>
             </div>
           </div>
-        </div>
+        </button>
       </DialogTrigger>
 
-      {/* Modal */}
-      <DialogContent className="stage-modal flex max-h-[90vh] flex-col border-white/10 sm:max-w-3xl">
-        <DialogHeader>
-          <div className="mb-2 flex items-center gap-2">
-            <span className="flex items-center gap-1.5 rounded-full border border-[oklch(0.72_0.17_72/0.3)] bg-[oklch(0.72_0.17_72/0.1)] px-2.5 py-1 text-xs font-semibold text-[oklch(0.72_0.17_72)]">
-              {getCategoryIcon(product.category)}
-              {getCategoryLabel(product.category)}
-            </span>
-          </div>
-          <DialogTitle className="text-2xl leading-tight font-extrabold tracking-tight">
-            {product.title}
-          </DialogTitle>
-        </DialogHeader>
-
-        <ScrollArea className="grow pr-6">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-5 lg:gap-8">
-            {/* Left col */}
-            <div className="flex flex-col space-y-4 lg:col-span-2">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-white/8">
+      <DialogContent className="border-line bg-surface-3 max-h-[92svh] gap-0 overflow-y-auto rounded-3xl p-0 sm:max-w-4xl">
+        <div className="grid lg:grid-cols-2">
+          {/* Coluna da mídia + descrição */}
+          <div className="border-line flex flex-col gap-6 border-t p-6 sm:p-8 lg:border-t-0 lg:border-r">
+            <div className="border-line bg-surface-2 relative aspect-16/10 overflow-hidden rounded-2xl border">
+              {cover(1280, 800) && (
                 <Image
-                  src={
-                    product.mainImage
-                      ? urlFor(product.mainImage).width(1280).height(720).url()
-                      : product.imageUrl
-                  }
+                  src={cover(1280, 800)}
                   alt={product.imageAlt || product.title}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 450px"
                   className="object-cover"
                 />
-              </div>
-
-              {product.badges?.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {product.badges.map((badge) => (
-                    <span
-                      key={badge}
-                      className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-white/50"
-                    >
-                      {badge}
-                    </span>
-                  ))}
-                </div>
               )}
-
-              <div className="text-muted-foreground text-sm leading-relaxed">
+            </div>
+            <Badges badges={product.badges} />
+            {product.longDescription?.length ? (
+              <div className="prose-site text-sm">
                 <PortableText value={product.longDescription} />
               </div>
-            </div>
+            ) : (
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                {product.description}
+              </p>
+            )}
+          </div>
 
-            {/* Right col — purchase options */}
-            <div className="flex flex-col space-y-4 lg:col-span-3">
-              <h4 className="text-xs font-bold tracking-widest text-white/40 uppercase">
-                Escolha sua opção
-              </h4>
-              <div className="space-y-3">
-                {product.purchaseOptions.map((option) => (
-                  <div
+          {/* Coluna de compra */}
+          <div className="order-first flex flex-col p-6 sm:p-8 lg:order-none">
+            <CategoryTag
+              product={product}
+              className="bg-primary/12 text-primary w-fit"
+            />
+            <DialogTitle className="mt-4 pr-8 text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+              {product.title}
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground mt-2 text-sm leading-relaxed">
+              {product.description}
+            </DialogDescription>
+
+            <h4 className="text-subtle mt-8 font-mono text-[0.65rem] tracking-[0.2em] uppercase">
+              {options.length > 1 ? "Escolha sua opção" : "Comprar"}
+            </h4>
+
+            {options.length > 0 ? (
+              <ul className="mt-4 flex flex-col gap-3">
+                {options.map((option) => (
+                  <li
                     key={option._key}
-                    className="plectrum-accent stage-panel rounded-xl border border-white/8 p-5 transition-colors hover:border-[oklch(0.72_0.17_72/0.3)]"
+                    className="border-line hover:border-primary/40 rounded-2xl border bg-white/[0.02] p-5 transition-colors"
                   >
-                    <div className="mb-4">
-                      <h5 className="font-bold">{option.name}</h5>
-                      {option.description && (
-                        <p className="text-muted-foreground mt-1 text-sm">
-                          {option.description}
-                        </p>
-                      )}
-                      <p className="mt-2 text-2xl font-extrabold text-[oklch(0.72_0.17_72)]">
-                        R$ {option.price.toFixed(2).replace(".", ",")}
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="font-semibold">{option.name}</p>
+                        {option.description && (
+                          <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                            {option.description}
+                          </p>
+                        )}
+                      </div>
+                      <p className="text-primary shrink-0 text-xl font-semibold tracking-tight tabular-nums">
+                        {formatPrice(option.price)}
                       </p>
                     </div>
-
-                    <Button
-                      asChild
-                      className="w-full bg-[oklch(0.72_0.17_72)] font-semibold text-[oklch(0.08_0.02_60)] hover:bg-[oklch(0.78_0.17_72)]"
+                    <a
+                      href={option.checkoutLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(actionVariants(), "mt-4 w-full")}
                     >
-                      <Link
-                        href={option.checkoutLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ShoppingCart className="mr-2 h-4 w-4" />
-                        Comprar Agora
-                      </Link>
-                    </Button>
-                  </div>
+                      <ShoppingBag />
+                      Comprar agora
+                    </a>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            ) : (
+              <p className="border-line text-muted-foreground mt-4 rounded-2xl border p-5 text-sm">
+                Este produto estará disponível em breve.
+              </p>
+            )}
+
+            <ul className="text-muted-foreground mt-auto flex flex-col gap-2.5 pt-8 text-xs">
+              <li className="flex items-center gap-2.5">
+                <Mail className="text-primary h-3.5 w-3.5" />
+                Link de download enviado por e-mail logo após o pagamento
+              </li>
+              <li className="flex items-center gap-2.5">
+                <CreditCard className="text-primary h-3.5 w-3.5" />
+                Pix ou cartão de crédito
+              </li>
+              <li className="flex items-center gap-2.5">
+                <ShieldCheck className="text-primary h-3.5 w-3.5" />
+                Checkout seguro em plataforma parceira
+              </li>
+            </ul>
           </div>
-        </ScrollArea>
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -9,7 +9,9 @@ export default function MainLayout({
   return (
     <>
       <TheHeader />
-      {children}
+      <main id="conteudo" className="flex min-h-svh flex-col">
+        {children}
+      </main>
       <TheFooter />
     </>
   );
